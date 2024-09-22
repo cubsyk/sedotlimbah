@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jasa Sedot WC Profesional</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f0f2f5;
+            color: #333;
+        }
+        header {
+            background: linear-gradient(135deg, #1e3c72, #2a5298);
+            color: white;
+            padding: 15px;
+            text-align: center;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+            position: relative;
+        }
+        header h1 {
+            font-size: 50px;
+            margin: 0;
+            font-weight: bold;
+        }
+        header h2 {
+            font-size: 24px;
+            font-weight: 500;
+        }
+        header nav {
+            margin: 20px 0;
+        }
+        header nav ul {
+            list-style-type: none;
+            padding: 0;
+            display: flex;
+            justify-content: center; /* Rata tengah */
+        }
+        header nav ul li {
+            margin: 0 15px;
+        }
+        header nav ul li a {
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+            transition: color 0.3s, border-bottom 0.3s;
+        }
+        header nav ul li a:hover {
+            color: #ffef00; /* Ganti warna saat hover */
+            border-bottom: 2px solid #ffef00; /* Garis bawah saat hover */
+        }
+        header::before {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 5px;
+            background-color: #ffef00;
+            border-radius: 5px;
+        }
+        .container {
+            width: 90%;
+            margin: 20px auto;
+            background-color: #ffffff;
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+            animation: fadeIn 1s ease-in;
+        }
+        .section-title {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+        .section-title h2 {
+            font-size: 36px;
+            color: #1e3c72;
+            margin-bottom: 10px;
+            font-weight: bold;
+            position: relative;
+            display: inline-block;
+        }
+        .section-title h2::after {
+            content: '';
+            position: absolute;
+            width: 50px;
+            height: 4px;
+            background-color: #ffef00;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            border-radius: 2px;
+        }
+        .section-title p {
+            color: #666;
+            font-size: 18px;
+        }
+        .services {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            justify-content: center;
+        }
+        .service-item {
+            flex: 1 1 300px;
+            background-color: #f7f7f7;
+            padding: 20px;
+            border-radius: 12px;
+            transition: transform 0.3s, background-color 0.3s, box-shadow 0.3s;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+        }
+        .service-item:hover {
+            background-color: #e0f7ff;
+            transform: translateY(-8px);
+            box-shadow: 0 12px 24px rgba(0, 0, 0, 0.3);
+        }
+        .service-item h3 {
+            margin-top: 0;
+            color: #1e3c72;
+            font-size: 24px;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+        .service-item p {
+            font-size: 16px;
+            color: #555;
+        }
+        .advertisement-gallery {
+            position: relative;
+            overflow: hidden;
+            border-radius: 12px;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+            margin-bottom: 40px;
+            background-color: #ffffff;
+        }
+        .slider {
+            width: 100%;
+            position: relative;
+        }
+        .slides {
+            display: flex;
+            transition: transform 0.6s ease-in-out;
+            width: 100%;
+        }
+        .slide {
+            min-width: 100%;
+            box-sizing: border-box;
+        }
+        .slide img {
+            width: 100%;
+            height: auto;
+            object-fit: cover;
+            border-radius: 12px;
+        }
+        .testimonials {
+            background: linear-gradient(135deg, #1e3c72, #2a5298);
+            color: white;
+            padding: 40px 20px;
+            border-radius: 12px;
+            margin-top: 40px;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+        }
+        .testimonials .section-title h2, 
+        .testimonials .section-title p {
+            color: white;
+        }
+        .testimonial-item {
+            background-color: #2a5298;
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            transition: background-color 0.3s;
+        }
+        .testimonial-item:hover {
+            background-color: #1e3c72;
+        }
+        .testimonial-item h3 {
+            color: #ffef00;
+            margin-top: 0;
+        }
+        .testimonial-item p {
+            margin: 10px 0 0 0;
+            color: #ddd;
+        }
+        .contact-info {
+            margin-top: 30px;
+            background-color: #1e3c72;
+            color: white;
+            padding: 20px;
+            border-radius: 8px;
+            text-align: center;
+            animation: pulse 2s infinite;
+        }
+        .contact-info h2 {
+            margin: 0 0 10px 0;
+        }
+        .contact-info p {
+            margin: 5px 0;
+            font-size: 18px;
+        }
+        .contact-info a {
+            color: #ffef00;
+            font-weight: bold;
+            text-decoration: none;
+            font-size: 20px;
+            display: inline-block;
+            margin-top: 10px;
+        }
+        footer {
+            background-color: #1e3c72;
+            color: white;
+            text-align: center;
+            padding: 15px;
+            margin-top: 30px;
+            position: relative;
+            box-shadow: 0 -2px 8px rgba(0, 0, 0, 0.1);
+        }
+        .back-to-top {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background-color: #ffef00;
+            color: #1e3c72;
+            border: none;
+            border-radius: 5px;
+            padding: 10px 15px;
+            font-size: 18px;
+            cursor: pointer;
+            display: none; /* Initially hidden */
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            transition: background-color 0.3s;
+        }
+        .back-to-top:hover {
+            background-color: #ffd700;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+        @media (max-width: 768px) {
+            .slide img {
+                height: auto;
+            }
+            .service-item {
+                flex: 1 1 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>Sinar Jaya Limbah</h1>
+    <h2>Jasa Sedot WC Profesional dan Terpercaya Se-Jabodetabek</h2>
+    <nav>
+        <ul>
+            <li><a href="#services">Layanan</a></li>
+            <li><a href="#testimonials">Testimoni</a></li>
+            <li><a href="#contact">Hubungi Kami</a></li>
+        </ul>
+    </nav>
+</header>
+
+<div class="container">
+    <div class="advertisement-gallery">
+        <div class="slider">
+            <div class="slides">
+                <div class="slide">
+                    <img src="images/ad1.jpg" alt="Advertisement 1">
+                </div>
+                <div class="slide">
+                    <img src="images/ad1.jpg" alt="Advertisement 2">
+                </div>
+                <div class="slide">
+                    <img src="images/ad1.jpg" alt="Advertisement 3">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="section-title" id="services">
+        <h2>Layanan Kami</h2>
+        <p>Kami menyediakan berbagai layanan untuk memenuhi kebutuhan Anda dengan harga terjangkau dan hasil yang memuaskan.</p>
+        <p>Wilayah kami mencakup area <strong>Se-Jabodetabek</strong></p>
+    </div>
+
+    <div class="services">
+        <div class="service-item">
+            <h3>Sedot WC</h3>
+            <p>Kami menyediakan layanan sedot WC untuk rumah, kantor, dan tempat umum dengan peralatan modern dan tenaga ahli.</p>
+        </div>
+        <div class="service-item">
+            <h3>Perbaikan Saluran</h3>
+            <p>Layanan perbaikan saluran mampet yang efektif untuk segala jenis masalah saluran air di rumah atau tempat usaha Anda.</p>
+        </div>
+        <div class="service-item">
+            <h3>Pembersihan Septic Tank</h3>
+            <p>Kami juga menyediakan layanan pembersihan dan perawatan septic tank agar tetap bersih dan berfungsi dengan baik.</p>
+        </div>
+    </div>
+
+    <div class="testimonials" id="testimonials">
+        <div class="section-title">
+            <h2>Apa Kata Pelanggan Kami</h2>
+            <p>Pelanggan kami puas dengan layanan yang kami berikan, berikut beberapa testimoni dari mereka.</p>
+        </div>
+
+        <div class="testimonial-item">
+            <h3>Budi Santoso - Bogor</h3>
+            <p>"Layanan sedot WC yang sangat cepat dan memuaskan. Harga terjangkau dan pelayanan ramah. Sangat direkomendasikan!"</p>
+        </div>
+        <div class="testimonial-item">
+            <h3>Sri Wahyuni - Bekasi</h3>
+            <p>"WC di rumah kami mampet, tapi berkat jasa ini, masalah teratasi dengan cepat. Tidak perlu menunggu lama dan harganya juga bagus."</p>
+        </div>
+        <div class="testimonial-item">
+            <h3>Riyan Saputra - Tangerang</h3>
+            <p>"Profesional, cepat tanggap, dan sangat efektif. Jasa sedot WC ini sangat bisa diandalkan. Terima kasih!"</p>
+        </div>
+    </div>
+
+    <div class="contact-info" id="contact">
+        <h2>Hubungi Kami</h2>
+        <p>Telepon : <a href="tel:08129393996" target="_blank">0812-9393-996</a></p>
+        <p>WhatsApp : <a href="https://wa.me/628129393996" target="_blank">Silahkan Klik Disini</a></p>
+    </div>
+</div>
+
+<footer>
+    <p>&copy; 2024 Sinar Jaya Limbah. All Rights Reserved.</p>
+</footer>
+
+<button class="back-to-top" id="backToTop">↑</button>
+
+<script>
+    let slideIndex = 0;
+    const slides = document.querySelector('.slides');
+    const totalSlides = document.querySelectorAll('.slide').length;
+
+    function showSlides() {
+        slideIndex++;
+        if (slideIndex >= totalSlides) {
+            slideIndex = 0;
+        }
+        slides.style.transform = `translateX(-${slideIndex * 100}%)`;
+        setTimeout(showSlides, 3000);
+    }
+
+    showSlides();
+
+    // Smooth scroll function
+    document.querySelectorAll('header nav ul li a').forEach(anchor => {
+        anchor.addEventListener('click', function(e) {
+            e.preventDefault();
+
+            const targetId = this.getAttribute('href');
+            const targetElement = document.querySelector(targetId);
+
+            targetElement.scrollIntoView({
+                behavior: 'smooth'
+            });
+        });
+    });
+
+    // Back to top button functionality
+    const backToTopButton = document.getElementById('backToTop');
+
+    window.onscroll = function() {
+        if (document.body.scrollTop > 100 || document.documentElement.scrollTop > 100) {
+            backToTopButton.style.display = 'block';
+        } else {
+            backToTopButton.style.display = 'none';
+        }
+    };
+
+    backToTopButton.onclick = function() {
+        window.scrollTo({
+            top: 0,
+            behavior: 'smooth'
+        });
+    };
+</script>
+
+</body>
+</html>
