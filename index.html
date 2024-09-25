@@ -7,78 +7,48 @@
     <style>
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            line-height: 1.6;
             margin: 0;
             padding: 0;
             background-color: #f0f2f5;
             color: #333;
         }
-
         header {
             background: linear-gradient(135deg, #1e3c72, #2a5298);
             color: white;
-            text-align: center;
+            padding: 15px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
             position: relative;
-            width: 100%;
         }
-
-        .header-content {
+        header .header-content {
             display: flex;
-            justify-content: space-between;
-            align-items: center;
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 10px 20px;
+            justify-content: space-between; /* Mengatur konten agar berada di kiri dan kanan */
+            align-items: center; /* Mengatur konten agar berada di tengah secara vertikal */
         }
-        header h1 a {
-            color: white;
+        header h1 {
+            font-size: 50px;
             margin: 0;
-            transition: color 0.3s, transform 0.3s;
-            text-decoration: none;
+            font-weight: bold;
         }
-        header h2 {
-            font-size: 24px;
-            font-weight: 500;
+        header nav {
+            margin: 0;
         }
-
-        .menu-toggle {
-            display: none;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            cursor: pointer;
-        }
-
-        .menu-toggle .bar {
-            width: 30px;
-            height: 3px;
-            background: #fff;
-            margin: 3px 0;
-            transition: 0.3s;
-        }
-
-        nav ul {
+        header nav ul {
             list-style-type: none;
             padding: 0;
             display: flex;
-            justify-content: center;
         }
-
-        nav ul li {
+        header nav ul li {
             margin: 0 15px;
         }
-
-        nav ul li a {
+        header nav ul li a {
             color: white;
             text-decoration: none;
             font-weight: bold;
-            transition: color 0.3s ease, border-bottom 0.3s ease;
+            transition: color 0.3s, border-bottom 0.3s;
         }
-
-        nav ul li a:hover {
-            color: #ffef00;
-            border-bottom: 2px solid #ffef00;
+        header nav ul li a:hover {
+            color: #ffef00; /* Ganti warna saat hover */
+            border-bottom: 2px solid #ffef00; /* Garis bawah saat hover */
         }
         header::before {
             content: '';
@@ -91,42 +61,6 @@
             background-color: #ffef00;
             border-radius: 5px;
         }
-
-        @media (max-width: 768px) {
-            .menu-toggle {
-                display: flex;
-                margin-left: 200px;
-            }
-
-            nav ul {
-                display: none;
-                flex-direction: column;
-                position: absolute;
-                top: 100px;
-                right: 10px;
-                background-color: #1e3c72;
-                width: 200px; /* Adjusted width */
-                padding: 10px;
-                border-radius: 5px;
-                box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
-                z-index: 10;
-                opacity: 0;
-                visibility: hidden;
-                transition: opacity 0.3s ease, visibility 0.3s ease;
-            }
-
-            .nav-active nav ul {
-                display: flex;
-                opacity: 1;
-                visibility: visible;
-            }
-
-            nav ul li {
-                margin: 10px 0;
-                text-align: center;
-            }
-        }
-
         .container {
             width: 90%;
             margin: 20px auto;
@@ -134,13 +68,12 @@
             padding: 20px;
             border-radius: 12px;
             box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+            animation: fadeIn 1s ease-in;
         }
-
         .section-title {
             text-align: center;
             margin-bottom: 40px;
         }
-
         .section-title h2 {
             font-size: 36px;
             color: #1e3c72;
@@ -149,7 +82,6 @@
             position: relative;
             display: inline-block;
         }
-
         .section-title h2::after {
             content: '';
             position: absolute;
@@ -161,19 +93,16 @@
             transform: translateX(-50%);
             border-radius: 2px;
         }
-
         .section-title p {
             color: #666;
             font-size: 18px;
         }
-
         .services {
             display: flex;
             flex-wrap: wrap;
             gap: 20px;
             justify-content: center;
         }
-
         .service-item {
             flex: 1 1 300px;
             background-color: #f7f7f7;
@@ -182,13 +111,11 @@
             transition: transform 0.3s, background-color 0.3s, box-shadow 0.3s;
             box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
         }
-
         .service-item:hover {
             background-color: #e0f7ff;
             transform: translateY(-8px);
             box-shadow: 0 12px 24px rgba(0, 0, 0, 0.3);
         }
-
         .service-item h3 {
             margin-top: 0;
             color: #1e3c72;
@@ -196,12 +123,37 @@
             font-weight: bold;
             margin-bottom: 10px;
         }
-
         .service-item p {
             font-size: 16px;
             color: #555;
         }
-
+        .advertisement-gallery {
+            position: relative;
+            overflow: hidden;
+            border-radius: 12px;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+            margin-bottom: 40px;
+            background-color: #ffffff;
+        }
+        .slider {
+            width: 100%;
+            position: relative;
+        }
+        .slides {
+            display: flex;
+            transition: transform 0.6s ease-in-out;
+            width: 100%;
+        }
+        .slide {
+            min-width: 100%;
+            box-sizing: border-box;
+        }
+        .slide img {
+            width: 100%;
+            height: auto;
+            object-fit: cover;
+            border-radius: 12px;
+        }
         .testimonials {
             background: linear-gradient(135deg, #1e3c72, #2a5298);
             color: white;
@@ -210,12 +162,10 @@
             margin-top: 40px;
             box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
         }
-
         .testimonials .section-title h2, 
         .testimonials .section-title p {
             color: white;
         }
-
         .testimonial-item {
             background-color: #2a5298;
             padding: 20px;
@@ -223,21 +173,17 @@
             margin-bottom: 20px;
             transition: background-color 0.3s;
         }
-
         .testimonial-item:hover {
             background-color: #1e3c72;
         }
-
         .testimonial-item h3 {
             color: #ffef00;
             margin-top: 0;
         }
-
         .testimonial-item p {
             margin: 10px 0 0 0;
             color: #ddd;
         }
-
         .contact-info {
             margin-top: 30px;
             background-color: #1e3c72;
@@ -247,30 +193,21 @@
             text-align: center;
             animation: pulse 2s infinite;
         }
-
         .contact-info h2 {
             margin: 0 0 10px 0;
         }
-
         .contact-info p {
             margin: 5px 0;
             font-size: 18px;
         }
-
         .contact-info a {
-            color: white;
+            color: #ffef00;
             font-weight: bold;
-            text-decoration: underline;
+            text-decoration: none;
             font-size: 20px;
             display: inline-block;
             margin-top: 10px;
-            transition: color 0.3s, transform 0.3s;
         }
-
-        .contact-info a:hover {
-            color: yellow;
-        }
-
         footer {
             background-color: #1e3c72;
             color: white;
@@ -280,7 +217,6 @@
             position: relative;
             box-shadow: 0 -2px 8px rgba(0, 0, 0, 0.1);
         }
-
         .back-to-top {
             position: fixed;
             bottom: 20px;
@@ -289,149 +225,119 @@
             color: #1e3c72;
             border: none;
             border-radius: 5px;
-            padding: 10px;
-            display: none;
+            padding: 10px 15px;
+            font-size: 18px;
+            cursor: pointer;
+            display: none; /* Initially hidden */
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            transition: background-color 0.3s;
         }
-
+        .back-to-top:hover {
+            background-color: #ffd700;
+        }
         @keyframes fadeIn {
             from { opacity: 0; }
             to { opacity: 1; }
         }
-
         @keyframes pulse {
             0% { transform: scale(1); }
             50% { transform: scale(1.05); }
             100% { transform: scale(1); }
         }
-
         @media (max-width: 768px) {
+            .slide img {
+                height: auto;
+            }
             .service-item {
                 flex: 1 1 100%;
-                margin-bottom: 20px;
-            }
-
-            .section-title h2 {
-                font-size: 28px;
-            }
-
-            .section-title p {
-                font-size: 16px;
-            }
-
-            .contact-info p
-            .contact-info p {
-                font-size: 16px;
-            }
-
-            .contact-info a {
-                font-size: 18px;
             }
         }
     </style>
 </head>
 <body>
 
-<header>
-    <div class="header-content">
-        <h1>
-            <a href="https://sedotlimbah.my.id">
-                <img src="images/logo.png" alt="Sinar Jaya Limbah" style="height: 50px;">
-            </a>
-        </h1>
-        <div class="menu-toggle" id="menu-toggle">
-            <div class="bar"></div>
-            <div class="bar"></div>
-            <div class="bar"></div>
+    <header>
+        <div class="header-content">
+            <h1>SINAR JAYA LIMBAH</h1>
+            <nav>
+                <ul>
+                    <li><a href="#services">Layanan</a></li>
+                    <li><a href="#testimonials">Testimoni</a></li>
+                    <li><a href="#contact">Hubungi Kami</a></li>
+                </ul>
+            </nav>
         </div>
-        <nav style="margin-right: 40px;">
-            <ul>
-                <li><a href="#services">Layanan</a></li>
-                <li><a href="#testimonials">Testimoni</a></li>
-                <li><a href="#contact">Hubungi Kami</a></li>
-            </ul>
-        </nav>
-    </div>
-</header>
+    </header>
+    
+    <div class="container">
+        <div class="advertisement-gallery">
+            <div class="slider">
+                <div class="slides">
+                    <div class="slide"><img src="img1.jpg" alt="Advertisement 1"></div>
+                    <div class="slide"><img src="img2.jpg" alt="Advertisement 2"></div>
+                    <div class="slide"><img src="img3.jpg" alt="Advertisement 3"></div>
+                </div>
+            </div>
+        </div>
 
-<div class="container">
-    <section class="section-title">
-        <h2>Selamat Datang di Jasa Sedot WC Profesional</h2>
-        <p>Solusi cepat dan tepat untuk masalah sanitasi Anda.</p>
-    </section>
+        <div class="section-title" id="services">
+            <h2>Layanan Kami</h2>
+            <p>Menawarkan layanan sedot WC dan perawatan septic tank profesional.</p>
+        </div>
+        <div class="services">
+            <div class="service-item">
+                <h3>Sedot WC</h3>
+                <p>Layanan sedot WC cepat dan profesional untuk semua jenis WC.</p>
+            </div>
+            <div class="service-item">
+                <h3>Perawatan Septic Tank</h3>
+                <p>Perawatan dan pembersihan septic tank untuk menjaga kebersihan lingkungan.</p>
+            </div>
+            <div class="service-item">
+                <h3>Konsultasi Gratis</h3>
+                <p>Kami memberikan konsultasi gratis untuk semua layanan yang kami tawarkan.</p>
+            </div>
+        </div>
 
-    <div class="services">
-        <div class="service-item">
-            <h3>Layanan 1</h3>
-            <p>Kami menyediakan layanan sedot WC cepat dan terpercaya.</p>
+        <div class="testimonials" id="testimonials">
+            <div class="section-title">
+                <h2>Apa Kata Pelanggan</h2>
+                <p>Testimoni dari pelanggan kami yang puas.</p>
+            </div>
+            <div class="testimonial-item">
+                <h3>Budi</h3>
+                <p>Layanan sangat cepat dan memuaskan! Sangat direkomendasikan.</p>
+            </div>
+            <div class="testimonial-item">
+                <h3>Sari</h3>
+                <p>Tim sangat profesional dan ramah. Terima kasih!</p>
+            </div>
         </div>
-        <div class="service-item">
-            <h3>Layanan 2</h3>
-            <p>Pembersihan dan perawatan sistem saluran air.</p>
-        </div>
-        <div class="service-item">
-            <h3>Layanan 3</h3>
-            <p>Instalasi dan perbaikan sistem sanitasi.</p>
-        </div>
-    </div>
 
-    <div class="testimonials" id="testimonials">
-        <div class="section-title">
-            <h2>Testimoni Pelanggan</h2>
-            <p>Apa yang pelanggan katakan tentang layanan kami?</p>
+        <div class="contact-info" id="contact">
+            <h2>Hubungi Kami</h2>
+            <p>Email: info@sinarjayalimbah.com</p>
+            <p>Telepon: 0812-3456-7890</p>
+            <a href="https://wa.me/081234567890">Hubungi via WhatsApp</a>
         </div>
-        <div class="testimonial-item">
-            <h3>Andi, Jakarta</h3>
-            <p>"Pelayanan cepat dan hasil memuaskan. Sangat profesional!"</p>
-        </div>
-        <div class="testimonial-item">
-            <h3>Siti, Depok</h3>
-            <p>"Harganya terjangkau dan timnya sangat ramah. Akan saya rekomendasikan ke teman-teman!"</p>
-        </div>
-        <div class="testimonial-item">
-            <h3>Budi, Tangerang</h3>
-            <p>"Saluran air saya sudah lancar kembali. Terima kasih Sinar Jaya Limbah!"</p>
-        </div>
-    </div>
-
-    <div class="container contact-info" id="contact">
-        <h2>Hubungi Kami</h2>
-        <p>Untuk informasi lebih lanjut, silakan hubungi kami:</p>
-        <p>📞 Telepon: 0812-9393-996</p>
-        <p>📧 Email: sinarjaya@gmail.com</p>
-        <p>📱 WhatsApp: 0812-9393-996</p>
-        <p><a href="https://wa.me/628129393996?text=Halo,%20Saya%20ingin%20bertanya%20mengenai%20Sedot%20WC%20dan%20lainnya.">Konsultasi GRATIS Disini</a></p>
     </div>
 
-<footer>
-    <p>&copy; 2024 Jasa Sedot WC Profesional. Semua hak dilindungi.</p>
-</footer>
+    <footer>
+        <p>&copy; 2024 Sinar Jaya Limbah. Semua hak dilindungi.</p>
+    </footer>
 
-<button class="back-to-top" id="back-to-top">Kembali ke Atas</button>
+    <button class="back-to-top" onclick="window.scrollTo({top: 0, behavior: 'smooth'});">Kembali ke Atas</button>
 
-<script>
-    // Smooth Scroll
-    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-        anchor.addEventListener('click', function (e) {
-            e.preventDefault();
-            document.querySelector(this.getAttribute('href')).scrollIntoView({
-                behavior: 'smooth'
-            });
-        });
-    });
-
-    // Back to top button
-    const backToTopButton = document.getElementById("backToTop");
-    window.onscroll = function() {
-        if (document.body.scrollTop > 200 || document.documentElement.scrollTop > 200) {
-            backToTopButton.style.display = "block";
-        } else {
-            backToTopButton.style.display = "none";
-        }
-    };
-
-    backToTopButton.addEventListener("click", function() {
-        window.scrollTo({ top: 0, behavior: 'smooth' });
-    });
-</script>
+    <script>
+        // Menampilkan tombol "Kembali ke Atas" saat scroll
+        window.onscroll = function() {
+            const backToTopButton = document.querySelector('.back-to-top');
+            if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+                backToTopButton.style.display = 'block';
+            } else {
+                backToTopButton.style.display = 'none';
+            }
+        };
+    </script>
 </body>
 </html>
