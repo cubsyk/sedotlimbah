@@ -1,0 +1,395 @@
+/* Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Arial', sans-serif;
+    line-height: 1.6;
+    color: #333;
+}
+
+header {
+    background: #333;
+    color: #fff;
+    padding: 1rem 0;
+    position: fixed;
+    width: 100%;
+    top: 0;
+    left: 0;
+    z-index: 1000;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.menu-toggle {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    margin-left: 20px;
+}
+
+.menu-toggle .bar {
+    width: 30px;
+    height: 3px;
+    background: #fff;
+    margin: 3px 0;
+    transition: 0.3s;
+}
+
+/* Menu Styles */
+#nav-menu {
+    display: block;
+    list-style: none;
+    justify-content: center;
+    width: 130px;
+    position: absolute;
+    top: 60px;
+    right: 20px;
+    background: #333;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    opacity: 0;
+    transform: translateY(-20px);
+    visibility: hidden;
+    transition: opacity 0.5s ease, transform 0.5s ease, visibility 0.5s ease;
+}
+
+/* Ketika menu aktif */
+.nav-active #nav-menu {
+    opacity: 1;
+    transform: translateY(0);
+    visibility: visible;
+}
+
+#nav-menu li {
+    margin: 15px 0;
+    text-align: center;
+}
+
+#nav-menu li a {
+    color: #fff;
+    text-decoration: none;
+    font-weight: bold;
+    transition: color 0.3s ease;
+}
+
+#nav-menu li a:hover {
+    color: #ff5722;
+}
+
+/* Hamburger Icon Animation */
+.menu-toggle .bar:nth-child(1) {
+    transition: transform 0.3s ease;
+}
+
+.menu-toggle .bar:nth-child(2) {
+    transition: opacity 0.3s ease;
+}
+
+.menu-toggle .bar:nth-child(3) {
+    transition: transform 0.3s ease;
+}
+
+.nav-active .menu-toggle .bar:nth-child(1) {
+    transform: rotate(45deg) translateY(6px);
+}
+
+.nav-active .menu-toggle .bar:nth-child(2) {
+    opacity: 0;
+}
+
+.nav-active .menu-toggle .bar:nth-child(3) {
+    transform: rotate(-45deg) translateY(-6px);
+}
+
+.hero {
+    background: url('../images/foto-diri.jpeg') no-repeat center center/cover;
+    color: #fff;
+    text-align: center;
+    padding: 100px 20px;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.hero-content {
+    max-width: 600px;
+    animation: fadeIn 2s ease-in-out;
+}
+
+.hero-content h1 {
+    font-size: 2.5rem;
+    margin-bottom: 20px;
+}
+
+.hero-content p {
+    font-size: 1.2rem;
+    margin-bottom: 20px;
+}
+
+.btn {
+    background: #ff5722;
+    color: #fff;
+    padding: 10px 20px;
+    text-decoration: none;
+    border-radius: 5px;
+    font-weight: bold;
+    transition: background 0.3s ease;
+}
+
+.btn:hover {
+    background: #3A3B3C;
+}
+
+.section {
+    padding: 60px 20px;
+}
+
+.bg-light {
+    background: #f4f4f4;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+h2 {
+    margin-bottom: 20px;
+    font-size: 2rem;
+    position: relative;
+}
+
+h2::after {
+    content: '';
+    display: block;
+    width: 50px;
+    height: 3px;
+    background: #ff5722;
+    position: absolute;
+    bottom: -10px;
+    left: 0;
+}
+
+.experience-item {
+    margin-bottom: 20px;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+}
+
+form label {
+    margin: 10px 0 5px;
+    font-weight: bold;
+}
+
+form input, form textarea {
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+}
+
+button {
+    background: #ff5722;
+    color: #fff;
+    border: none;
+    padding: 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: background 0.3s ease;
+}
+
+button:hover {
+    background: #e64a19;
+}
+
+footer {
+    background: #333;
+    color: #fff;
+    text-align: center;
+    padding: 10px;
+    position: relative;
+}
+
+/* Media Query for Mobile */
+@media (max-width: 768px) {
+    #nav-menu {
+        display: block;
+        opacity: 0;
+        transform: translateY(-20px);
+        visibility: hidden;
+        position: absolute;
+        top: 60px;
+        right: 20px;
+        background: #333;
+        border-radius: 5px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+        list-style: none;
+        width: 130px;
+    }
+
+    .nav-active #nav-menu {
+        opacity: 1;
+        transform: translateY(0);
+        visibility: visible;
+    }
+
+    #nav-menu li {
+        margin: 10px 0;
+    }
+}
+
+/* About Section */
+.about-content {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 60px 20px;
+}
+
+.about-image {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-right: 10px; /* Ruang antara gambar dan teks */
+}
+
+.about-image img {
+    max-width: 80%;
+    height: auto;
+    border-radius: 50px;
+}
+
+.about-text {
+    flex: 2;
+    text-align: left;
+}
+
+.about-text h2 {
+    margin-bottom: 20px;
+    font-size: 2rem;
+}
+
+.about-text p {
+    margin-bottom: 20px;
+    font-size: 1rem;
+    line-height: 1.6;
+}
+
+/* Contact Section */
+.contact-info {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.contact-item {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #ff5722;
+    color: #fff;
+    padding: 10px 20px;
+    margin: 10px 0;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    text-decoration: none;
+    transition: background 0.3s ease, color 0.3s ease;
+    width: 200px;
+    font-weight: bold;
+}
+
+.contact-item i {
+    font-size: 1.5rem;
+    margin-right: 10px;
+}
+
+.contact-item:hover {
+    background: #3A3B3C;
+    color: #fff;
+}
+
+.contact-item span {
+    font-size: 1rem;
+}
+
+/* Contact Form */
+.contact-form {
+    width: 100%;
+    max-width: 600px;
+    margin-top: 20px;
+}
+
+.contact-form label {
+    margin: 10px 0 5px;
+    font-weight: bold;
+}
+
+.contact-form input, .contact-form textarea {
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    width: 100%;
+}
+
+.contact-form button {
+    background: #ff5722;
+    color: #fff;
+    border: none;
+    padding: 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: background 0.3s ease;
+}
+
+.contact-form button:hover {
+    background: #e64a19;
+}
+
+/* Menggunakan Font Awesome untuk ikon */
+@import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css');
+
+/* Media Query untuk tampilan mobile */
+@media (max-width: 768px) {
+    .about-content {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .about-image {
+        padding-right: 0;
+        margin-bottom: 20px;
+    }
+
+    .about-image img {
+        max-width: 60%;
+        height: auto;
+    }
+
+    .about-text {
+        flex: 1;
+        padding: 0 20px;
+    }
+
+    .about-text h2 {
+        font-size: 1.5rem;
+    }
+
+    .about-text p {
+        font-size: 0.9rem;
+    }
+}

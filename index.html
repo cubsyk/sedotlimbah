@@ -3,341 +3,171 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Jasa Sedot WC Profesional</title>
-    <style>
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            margin: 0;
-            padding: 0;
-            background-color: #f0f2f5;
-            color: #333;
-        }
-        header {
-            background: linear-gradient(135deg, #1e3c72, #2a5298);
-            color: white;
-            padding: 15px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
-            position: relative;
-        }
-        header .header-content {
-            display: flex;
-            justify-content: space-between; /* Mengatur konten agar berada di kiri dan kanan */
-            align-items: center; /* Mengatur konten agar berada di tengah secara vertikal */
-        }
-        header h1 {
-            font-size: 50px;
-            margin: 0;
-            font-weight: bold;
-        }
-        header nav {
-            margin: 0;
-        }
-        header nav ul {
-            list-style-type: none;
-            padding: 0;
-            display: flex;
-        }
-        header nav ul li {
-            margin: 0 15px;
-        }
-        header nav ul li a {
-            color: white;
-            text-decoration: none;
-            font-weight: bold;
-            transition: color 0.3s, border-bottom 0.3s;
-        }
-        header nav ul li a:hover {
-            color: #ffef00; /* Ganti warna saat hover */
-            border-bottom: 2px solid #ffef00; /* Garis bawah saat hover */
-        }
-        header::before {
-            content: '';
-            position: absolute;
-            bottom: -5px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 100px;
-            height: 5px;
-            background-color: #ffef00;
-            border-radius: 5px;
-        }
-        .container {
-            width: 90%;
-            margin: 20px auto;
-            background-color: #ffffff;
-            padding: 20px;
-            border-radius: 12px;
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
-            animation: fadeIn 1s ease-in;
-        }
-        .section-title {
-            text-align: center;
-            margin-bottom: 40px;
-        }
-        .section-title h2 {
-            font-size: 36px;
-            color: #1e3c72;
-            margin-bottom: 10px;
-            font-weight: bold;
-            position: relative;
-            display: inline-block;
-        }
-        .section-title h2::after {
-            content: '';
-            position: absolute;
-            width: 50px;
-            height: 4px;
-            background-color: #ffef00;
-            bottom: -10px;
-            left: 50%;
-            transform: translateX(-50%);
-            border-radius: 2px;
-        }
-        .section-title p {
-            color: #666;
-            font-size: 18px;
-        }
-        .services {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 20px;
-            justify-content: center;
-        }
-        .service-item {
-            flex: 1 1 300px;
-            background-color: #f7f7f7;
-            padding: 20px;
-            border-radius: 12px;
-            transition: transform 0.3s, background-color 0.3s, box-shadow 0.3s;
-            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
-        }
-        .service-item:hover {
-            background-color: #e0f7ff;
-            transform: translateY(-8px);
-            box-shadow: 0 12px 24px rgba(0, 0, 0, 0.3);
-        }
-        .service-item h3 {
-            margin-top: 0;
-            color: #1e3c72;
-            font-size: 24px;
-            font-weight: bold;
-            margin-bottom: 10px;
-        }
-        .service-item p {
-            font-size: 16px;
-            color: #555;
-        }
-        .advertisement-gallery {
-            position: relative;
-            overflow: hidden;
-            border-radius: 12px;
-            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
-            margin-bottom: 40px;
-            background-color: #ffffff;
-        }
-        .slider {
-            width: 100%;
-            position: relative;
-        }
-        .slides {
-            display: flex;
-            transition: transform 0.6s ease-in-out;
-            width: 100%;
-        }
-        .slide {
-            min-width: 100%;
-            box-sizing: border-box;
-        }
-        .slide img {
-            width: 100%;
-            height: auto;
-            object-fit: cover;
-            border-radius: 12px;
-        }
-        .testimonials {
-            background: linear-gradient(135deg, #1e3c72, #2a5298);
-            color: white;
-            padding: 40px 20px;
-            border-radius: 12px;
-            margin-top: 40px;
-            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
-        }
-        .testimonials .section-title h2, 
-        .testimonials .section-title p {
-            color: white;
-        }
-        .testimonial-item {
-            background-color: #2a5298;
-            padding: 20px;
-            border-radius: 8px;
-            margin-bottom: 20px;
-            transition: background-color 0.3s;
-        }
-        .testimonial-item:hover {
-            background-color: #1e3c72;
-        }
-        .testimonial-item h3 {
-            color: #ffef00;
-            margin-top: 0;
-        }
-        .testimonial-item p {
-            margin: 10px 0 0 0;
-            color: #ddd;
-        }
-        .contact-info {
-            margin-top: 30px;
-            background-color: #1e3c72;
-            color: white;
-            padding: 20px;
-            border-radius: 8px;
-            text-align: center;
-            animation: pulse 2s infinite;
-        }
-        .contact-info h2 {
-            margin: 0 0 10px 0;
-        }
-        .contact-info p {
-            margin: 5px 0;
-            font-size: 18px;
-        }
-        .contact-info a {
-            color: #ffef00;
-            font-weight: bold;
-            text-decoration: none;
-            font-size: 20px;
-            display: inline-block;
-            margin-top: 10px;
-        }
-        footer {
-            background-color: #1e3c72;
-            color: white;
-            text-align: center;
-            padding: 15px;
-            margin-top: 30px;
-            position: relative;
-            box-shadow: 0 -2px 8px rgba(0, 0, 0, 0.1);
-        }
-        .back-to-top {
-            position: fixed;
-            bottom: 20px;
-            right: 20px;
-            background-color: #ffef00;
-            color: #1e3c72;
-            border: none;
-            border-radius: 5px;
-            padding: 10px 15px;
-            font-size: 18px;
-            cursor: pointer;
-            display: none; /* Initially hidden */
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-            transition: background-color 0.3s;
-        }
-        .back-to-top:hover {
-            background-color: #ffd700;
-        }
-        @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
-        }
-        @keyframes pulse {
-            0% { transform: scale(1); }
-            50% { transform: scale(1.05); }
-            100% { transform: scale(1); }
-        }
-        @media (max-width: 768px) {
-            .slide img {
-                height: auto;
-            }
-            .service-item {
-                flex: 1 1 100%;
-            }
-        }
-    </style>
+    <title>Portofolio Saya</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <!-- Tambahkan skrip EmailJS -->
+    <script src="https://cdn.emailjs.com/dist/email.min.js"></script>
+    <script>
+        emailjs.init("p_av0Bt_Bp9vi6yV6"); // Ganti dengan user_id Anda
+    </script>
 </head>
 <body>
-
     <header>
-        <div class="header-content">
-            <h1>SINAR JAYA LIMBAH</h1>
-            <nav>
-                <ul>
-                    <li><a href="#services">Layanan</a></li>
-                    <li><a href="#testimonials">Testimoni</a></li>
-                    <li><a href="#contact">Hubungi Kami</a></li>
-                </ul>
-            </nav>
-        </div>
+        <nav>
+            <div class="menu-toggle" id="menu-toggle">
+                <div class="bar"></div>
+                <div class="bar"></div>
+                <div class="bar"></div>
+            </div>
+            <ul id="nav-menu">
+                <li><a href="#home">Beranda</a></li>
+                <li><a href="#about">Tentang</a></li>
+                <li><a href="#experience">Pengalaman</a></li>
+                <li><a href="#contact">Kontak</a></li>
+            </ul>
+        </nav>
     </header>
-    
+
+    <section id="home" class="hero">
+        <div class="hero-content">
+            <h1>Halo, Saya Bayu</h1>
+            <p>Selamat datang di portofolio saya.</p>
+            <a href="#about" class="btn btn-learn-more">Pelajari Lebih Lanjut</a>
+        </div>
+    </section>
+
+<section id="about" class="section">
     <div class="container">
-        <div class="advertisement-gallery">
-            <div class="slider">
-                <div class="slides">
-                    <div class="slide"><img src="img1.jpg" alt="Advertisement 1"></div>
-                    <div class="slide"><img src="img2.jpg" alt="Advertisement 2"></div>
-                    <div class="slide"><img src="img3.jpg" alt="Advertisement 3"></div>
-                </div>
+        <div class="about-content">
+            <div class="about-image">
+                <img src="images/foto-bayu.png" alt="foto-bayu">
             </div>
-        </div>
-
-        <div class="section-title" id="services">
-            <h2>Layanan Kami</h2>
-            <p>Menawarkan layanan sedot WC dan perawatan septic tank profesional.</p>
-        </div>
-        <div class="services">
-            <div class="service-item">
-                <h3>Sedot WC</h3>
-                <p>Layanan sedot WC cepat dan profesional untuk semua jenis WC.</p>
+            <div class="about-text">
+                <h2>Tentang Saya</h2>
+                <p>Saya adalah mahasiswa di Universitas Indraprasta PGRI, sedang menempuh pendidikan di bidang Sistem Informasi. Sebelumnya, saya menyelesaikan pendidikan di SMK Abdi Karya dengan keahlian dalam Teknik Komputer dan Jaringan. Selama beberapa tahun terakhir, saya mengembangkan keterampilan di bidang teknologi informasi, khususnya dalam jaringan komputer dan pengembangan sistem informasi.</p>
+                <p>Dengan latar belakang yang kuat dalam teknik jaringan dan pengembangan sistem, saya selalu berusaha untuk menerapkan solusi praktis dan efisien dalam setiap proyek yang saya kerjakan. Saya memiliki ketertarikan yang mendalam pada inovasi teknologi terbaru, terutama yang dapat membantu dalam mengoptimalkan kinerja sistem dan mempercepat proses bisnis.</p>
+                <p>Selain fokus pada akademik, saya juga secara aktif mengikuti perkembangan tren teknologi seperti komputasi awan, kecerdasan buatan, dan keamanan siber. Saya percaya bahwa perkembangan teknologi yang pesat memberikan banyak peluang bagi individu yang siap untuk terus belajar dan beradaptasi. Oleh karena itu, saya selalu membuka diri untuk tantangan baru dan proyek-proyek kolaboratif yang dapat memperluas wawasan dan keterampilan teknis saya.</p>
+                <p>Saya meyakini bahwa pemahaman yang mendalam tentang sistem informasi dan jaringan tidak hanya bermanfaat secara teknis, tetapi juga memberikan kontribusi besar dalam memecahkan masalah-masalah nyata di berbagai industri. Dengan dedikasi dan semangat belajar yang tinggi, saya siap untuk menghadapi tantangan teknologi yang dinamis dan memberikan dampak positif melalui solusi yang inovatif.</p>
             </div>
-            <div class="service-item">
-                <h3>Perawatan Septic Tank</h3>
-                <p>Perawatan dan pembersihan septic tank untuk menjaga kebersihan lingkungan.</p>
-            </div>
-            <div class="service-item">
-                <h3>Konsultasi Gratis</h3>
-                <p>Kami memberikan konsultasi gratis untuk semua layanan yang kami tawarkan.</p>
-            </div>
-        </div>
-
-        <div class="testimonials" id="testimonials">
-            <div class="section-title">
-                <h2>Apa Kata Pelanggan</h2>
-                <p>Testimoni dari pelanggan kami yang puas.</p>
-            </div>
-            <div class="testimonial-item">
-                <h3>Budi</h3>
-                <p>Layanan sangat cepat dan memuaskan! Sangat direkomendasikan.</p>
-            </div>
-            <div class="testimonial-item">
-                <h3>Sari</h3>
-                <p>Tim sangat profesional dan ramah. Terima kasih!</p>
-            </div>
-        </div>
-
-        <div class="contact-info" id="contact">
-            <h2>Hubungi Kami</h2>
-            <p>Email: info@sinarjayalimbah.com</p>
-            <p>Telepon: 0812-3456-7890</p>
-            <a href="https://wa.me/081234567890">Hubungi via WhatsApp</a>
         </div>
     </div>
+</section>
+
+
+    <section id="experience" class="section bg-light">
+        <div class="container">
+            <h2>Pengalaman</h2>
+            <div class="experience-item">
+                <h3>Pendidikan</h3>
+                <p>Universitas Indraprasta PGRI (2023 - ...)</p>
+                <p>SMK Abdi Karya (2018 - 2021)</p>
+                <p>SMPN 23 Kota Bekasi (2015 - 2018)</p>
+            </div>
+            <div class="experience-item">
+                <h3>Pengalaman Kerja</h3>
+                <p>PT. Indomarco Prismatama (April 2023 - Maret 2024)</p>
+				<p>Corner Dimsum Bintara (November 2021 - Juni 2022)</p>
+            </div>
+        </div>
+    </section>
+
+<section id="contact" class="section bg-light">
+    <div class="container">
+        <h2>Kontak</h2>
+        <p>Anda dapat menghubungi saya melalui saluran berikut atau mengisi formulir di bawah ini:</p>
+        <div class="contact-info">
+            <a href="mailto:akunbayu18@gmail.com" class="contact-item">
+                <i class="fa fa-envelope"></i>
+                <span>Email</span>
+            </a>
+            <a href="https://wa.me/6289516053286" class="contact-item" target="_blank">
+                <i class="fa fa-whatsapp"></i>
+                <span>WhatsApp</span>
+            </a>
+            <a href="https://instagram.com/bayuufa" class="contact-item" target="_blank">
+                <i class="fa fa-instagram"></i>
+                <span>Instagram</span>
+            </a>
+        </div>
+        <div class="contact-form">
+            <h3>Formulir Kontak</h3>
+            <form id="contact-form">
+                <label for="name">Nama:</label>
+                <input type="text" id="name" name="name" required>
+
+                <label for="email">Email:</label>
+                <input type="email" id="email" name="email" required>
+
+                <label for="message">Pesan:</label>
+                <textarea id="message" name="message" rows="4" required></textarea>
+
+                <button type="submit">Kirim Pesan</button>
+            </form>
+        </div>
+    </div>
+</section>
 
     <footer>
-        <p>&copy; 2024 Sinar Jaya Limbah. Semua hak dilindungi.</p>
+        <p>&copy; 2024 Muhammad Bayu FA. Semua hak cipta dilindungi.</p>
     </footer>
 
-    <button class="back-to-top" onclick="window.scrollTo({top: 0, behavior: 'smooth'});">Kembali ke Atas</button>
+    <!-- JavaScript untuk menutup menu dan menambahkan scroll halus -->
+<script>
+    const menuToggle = document.querySelector('#menu-toggle');
+    const navMenu = document.querySelector('#nav-menu');
+    const navItems = document.querySelectorAll('#nav-menu li a');
+    const learnMoreButton = document.querySelector('.btn-learn-more');
+    const contactForm = document.getElementById('contact-form');
 
-    <script>
-        // Menampilkan tombol "Kembali ke Atas" saat scroll
-        window.onscroll = function() {
-            const backToTopButton = document.querySelector('.back-to-top');
-            if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
-                backToTopButton.style.display = 'block';
-            } else {
-                backToTopButton.style.display = 'none';
-            }
-        };
-    </script>
+    // Toggle menu on hamburger click
+    menuToggle.addEventListener('click', () => {
+        document.body.classList.toggle('nav-active');
+    });
+
+    // Smooth scroll and close menu when a menu item is clicked
+    navItems.forEach(item => {
+        item.addEventListener('click', (e) => {
+            e.preventDefault(); // Mencegah perilaku default (melompat langsung)
+            
+            // Scroll halus ke target
+            const targetId = item.getAttribute('href').substring(1); // Ambil ID dari href
+            const targetSection = document.getElementById(targetId); // Cari elemen dengan ID tersebut
+            targetSection.scrollIntoView({
+                behavior: 'smooth'
+            });
+
+            // Tutup menu setelah memilih item
+            document.body.classList.remove('nav-active');
+        });
+    });
+
+    // Smooth scroll to "about" section when the "Pelajari Lebih Lanjut" button is clicked
+    learnMoreButton.addEventListener('click', (e) => {
+        e.preventDefault(); // Mencegah perilaku default (melompat langsung)
+        
+        // Scroll halus ke target
+        const targetId = learnMoreButton.getAttribute('href').substring(1); // Ambil ID dari href
+        const targetSection = document.getElementById(targetId); // Cari elemen dengan ID tersebut
+        targetSection.scrollIntoView({
+            behavior: 'smooth'
+        });
+    });
+
+    // Kirim formulir kontak menggunakan EmailJS
+    contactForm.addEventListener('submit', function(event) {
+        event.preventDefault(); // Mencegah pengiriman formulir default
+
+        emailjs.sendForm('service_m9h1gdp', 'template_7wd06d6', this)
+            .then(function(response) {
+                alert('Pesan berhasil dikirim!');
+                contactForm.reset(); // Reset formulir setelah pengiriman
+            }, function(error) {
+                alert('Gagal mengirim pesan: ' + JSON.stringify(error));
+            });
+    });
+</script>
+
+    <!-- File JS eksternal -->
+    <script src="js/scripts.js"></script>
 </body>
 </html>
