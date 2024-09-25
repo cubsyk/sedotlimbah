@@ -9,6 +9,15 @@ body {
     font-family: Arial, sans-serif;
 }
 
+.container {
+    text-align: center;
+}
+
+.image {
+    max-width: 200px;
+    margin-bottom: 20px;
+}
+
 .blink-text {
     font-size: 2rem;
     font-weight: bold;
