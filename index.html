@@ -1,173 +1,17 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <link rel="icon" href="images/foto.jpg" type="image/png">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Portofolio Saya</title>
-    <link rel="stylesheet" href="css/styles.css">
-    <!-- Tambahkan skrip EmailJS -->
-    <script src="https://cdn.emailjs.com/dist/email.min.js"></script>
-    <script>
-        emailjs.init("p_av0Bt_Bp9vi6yV6"); // Ganti dengan user_id Anda
-    </script>
+    <title>Under Maintenance</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <header>
-        <nav>
-            <div class="menu-toggle" id="menu-toggle">
-                <div class="bar"></div>
-                <div class="bar"></div>
-                <div class="bar"></div>
-            </div>
-            <ul id="nav-menu">
-                <li><a href="#home">Beranda</a></li>
-                <li><a href="#about">Tentang</a></li>
-                <li><a href="#experience">Pengalaman</a></li>
-                <li><a href="#contact">Kontak</a></li>
-            </ul>
-        </nav>
-    </header>
-
-    <section id="home" class="hero">
-        <div class="hero-content">
-            <h1>Halo, Saya Bayu</h1>
-            <p>Selamat datang di portofolio saya.</p>
-            <a href="#about" class="btn btn-learn-more">Pelajari Lebih Lanjut</a>
-        </div>
-    </section>
-
-<section id="about" class="section">
     <div class="container">
-        <div class="about-content">
-            <div class="about-image">
-                <img src="images/foto-bayu.png" alt="foto-bayu">
-            </div>
-            <div class="about-text">
-                <h2>Tentang Saya</h2>
-                <p>Saya adalah mahasiswa di Universitas Indraprasta PGRI, sedang menempuh pendidikan di bidang Sistem Informasi. Sebelumnya, saya menyelesaikan pendidikan di SMK Abdi Karya dengan keahlian dalam Teknik Komputer dan Jaringan. Selama beberapa tahun terakhir, saya mengembangkan keterampilan di bidang teknologi informasi, khususnya dalam jaringan komputer dan pengembangan sistem informasi.</p>
-                <p>Dengan latar belakang yang kuat dalam teknik jaringan dan pengembangan sistem, saya selalu berusaha untuk menerapkan solusi praktis dan efisien dalam setiap proyek yang saya kerjakan. Saya memiliki ketertarikan yang mendalam pada inovasi teknologi terbaru, terutama yang dapat membantu dalam mengoptimalkan kinerja sistem dan mempercepat proses bisnis.</p>
-                <p>Selain fokus pada akademik, saya juga secara aktif mengikuti perkembangan tren teknologi seperti komputasi awan, kecerdasan buatan, dan keamanan siber. Saya percaya bahwa perkembangan teknologi yang pesat memberikan banyak peluang bagi individu yang siap untuk terus belajar dan beradaptasi. Oleh karena itu, saya selalu membuka diri untuk tantangan baru dan proyek-proyek kolaboratif yang dapat memperluas wawasan dan keterampilan teknis saya.</p>
-                <p>Saya meyakini bahwa pemahaman yang mendalam tentang sistem informasi dan jaringan tidak hanya bermanfaat secara teknis, tetapi juga memberikan kontribusi besar dalam memecahkan masalah-masalah nyata di berbagai industri. Dengan dedikasi dan semangat belajar yang tinggi, saya siap untuk menghadapi tantangan teknologi yang dinamis dan memberikan dampak positif melalui solusi yang inovatif.</p>
-            </div>
-        </div>
+        <div class="blink-text">Under Maintenance</div>
+        <hr>
+        <p>sabar coy</p>
     </div>
-</section>
-
-
-    <section id="experience" class="section bg-light">
-        <div class="container">
-            <h2>Pengalaman</h2>
-            <div class="experience-item">
-                <h3>Pendidikan</h3>
-                <p>Universitas Indraprasta PGRI (2023 - ...)</p>
-                <p>SMK Abdi Karya (2018 - 2021)</p>
-                <p>SMPN 23 Kota Bekasi (2015 - 2018)</p>
-            </div>
-            <div class="experience-item">
-                <h3>Pengalaman Kerja</h3>
-                <p>PT. Indomarco Prismatama (April 2023 - Maret 2024)</p>
-				<p>Corner Dimsum Bintara (November 2021 - Juni 2022)</p>
-            </div>
-        </div>
-    </section>
-
-<section id="contact" class="section bg-light">
-    <div class="container">
-        <h2>Kontak</h2>
-        <p>Anda dapat menghubungi saya melalui saluran berikut atau mengisi formulir di bawah ini:</p>
-        <div class="contact-info">
-            <a href="mailto:akunbayu18@gmail.com" class="contact-item">
-                <i class="fa fa-envelope"></i>
-                <span>Email</span>
-            </a>
-            <a href="https://wa.me/6289516053286" class="contact-item" target="_blank">
-                <i class="fa fa-whatsapp"></i>
-                <span>WhatsApp</span>
-            </a>
-            <a href="https://instagram.com/bayuufa" class="contact-item" target="_blank">
-                <i class="fa fa-instagram"></i>
-                <span>Instagram</span>
-            </a>
-        </div>
-        <div class="contact-form">
-            <h3>Formulir Kontak</h3>
-            <form id="contact-form">
-                <label for="name">Nama:</label>
-                <input type="text" id="name" name="name" required>
-
-                <label for="email">Email:</label>
-                <input type="email" id="email" name="email" required>
-
-                <label for="message">Pesan:</label>
-                <textarea id="message" name="message" rows="4" required></textarea>
-
-                <button type="submit">Kirim Pesan</button>
-            </form>
-        </div>
-    </div>
-</section>
-
-    <footer>
-        <p>&copy; 2024 Muhammad Bayu FA. Semua hak cipta dilindungi.</p>
-    </footer>
-
-    <!-- JavaScript untuk menutup menu dan menambahkan scroll halus -->
-<script>
-    const menuToggle = document.querySelector('#menu-toggle');
-    const navMenu = document.querySelector('#nav-menu');
-    const navItems = document.querySelectorAll('#nav-menu li a');
-    const learnMoreButton = document.querySelector('.btn-learn-more');
-    const contactForm = document.getElementById('contact-form');
-
-    // Toggle menu on hamburger click
-    menuToggle.addEventListener('click', () => {
-        document.body.classList.toggle('nav-active');
-    });
-
-    // Smooth scroll and close menu when a menu item is clicked
-    navItems.forEach(item => {
-        item.addEventListener('click', (e) => {
-            e.preventDefault(); // Mencegah perilaku default (melompat langsung)
-            
-            // Scroll halus ke target
-            const targetId = item.getAttribute('href').substring(1); // Ambil ID dari href
-            const targetSection = document.getElementById(targetId); // Cari elemen dengan ID tersebut
-            targetSection.scrollIntoView({
-                behavior: 'smooth'
-            });
-
-            // Tutup menu setelah memilih item
-            document.body.classList.remove('nav-active');
-        });
-    });
-
-    // Smooth scroll to "about" section when the "Pelajari Lebih Lanjut" button is clicked
-    learnMoreButton.addEventListener('click', (e) => {
-        e.preventDefault(); // Mencegah perilaku default (melompat langsung)
-        
-        // Scroll halus ke target
-        const targetId = learnMoreButton.getAttribute('href').substring(1); // Ambil ID dari href
-        const targetSection = document.getElementById(targetId); // Cari elemen dengan ID tersebut
-        targetSection.scrollIntoView({
-            behavior: 'smooth'
-        });
-    });
-
-    // Kirim formulir kontak menggunakan EmailJS
-    contactForm.addEventListener('submit', function(event) {
-        event.preventDefault(); // Mencegah pengiriman formulir default
-
-        emailjs.sendForm('service_m9h1gdp', 'template_7wd06d6', this)
-            .then(function(response) {
-                alert('Pesan berhasil dikirim!');
-                contactForm.reset(); // Reset formulir setelah pengiriman
-            }, function(error) {
-                alert('Gagal mengirim pesan: ' + JSON.stringify(error));
-            });
-    });
-</script>
-
-    <!-- File JS eksternal -->
-    <script src="js/scripts.js"></script>
 </body>
 </html>
