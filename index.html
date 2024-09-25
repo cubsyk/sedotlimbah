@@ -27,15 +27,19 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            max-width: 1200px;
+            max-width: 1200px; /* Atur sesuai lebar maksimal yang diinginkan */
             margin: 0 auto;
-            padding: 10px 20px;
+            padding: 10px 20px; /* Tambahkan padding agar tidak terlalu mepet */
         }
-
         header h1 a {
             color: white;
             margin: 0;
+            transition: color 0.3s, transform 0.3s;
             text-decoration: none;
+        }
+        header h2 {
+            font-size: 24px;
+            font-weight: 500;
         }
 
         .menu-toggle {
@@ -76,7 +80,6 @@
             color: #ffef00;
             border-bottom: 2px solid #ffef00;
         }
-
         header::before {
             content: '';
             position: absolute;
@@ -93,24 +96,31 @@
         @media (max-width: 768px) {
             .menu-toggle {
                 display: flex;
+                margin-left: 200px;
             }
 
             nav ul {
                 display: none; /* Hide the menu on mobile by default */
                 flex-direction: column; /* Stack items vertically */
                 position: absolute;
-                top: 60px;
-                right: 20px;
+                top: 100px;
+                right: 10px;
                 background-color: #1e3c72;
-                width: 90%; /* Full width on mobile */
+                width: 20%; /* Full width on mobile */
                 padding: 10px;
                 border-radius: 5px;
                 box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
                 z-index: 10; /* Ensure menu is above other content */
+                opacity: 0; /* Start hidden */
+                visibility: hidden; /* Hidden initially */
+                transition: opacity 0.3s ease, visibility 0.3s ease;
             }
 
-            nav ul.active {
+            .nav-active nav ul {
                 display: flex; /* Show menu when active */
+                display: flex; /* Show menu when active */
+                opacity: 1; /* Fade in */
+                visibility: visible; /* Make visible */
             }
 
             nav ul li {
@@ -127,12 +137,10 @@
             border-radius: 12px;
             box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
         }
-
         .section-title {
             text-align: center;
             margin-bottom: 40px;
         }
-
         .section-title h2 {
             font-size: 36px;
             color: #1e3c72;
@@ -141,7 +149,6 @@
             position: relative;
             display: inline-block;
         }
-
         .section-title h2::after {
             content: '';
             position: absolute;
@@ -153,19 +160,16 @@
             transform: translateX(-50%);
             border-radius: 2px;
         }
-
         .section-title p {
             color: #666;
             font-size: 18px;
         }
-
         .services {
             display: flex;
             flex-wrap: wrap;
             gap: 20px;
             justify-content: center;
         }
-
         .service-item {
             flex: 1 1 300px;
             background-color: #f7f7f7;
@@ -174,13 +178,11 @@
             transition: transform 0.3s, background-color 0.3s, box-shadow 0.3s;
             box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
         }
-
         .service-item:hover {
             background-color: #e0f7ff;
             transform: translateY(-8px);
             box-shadow: 0 12px 24px rgba(0, 0, 0, 0.3);
         }
-
         .service-item h3 {
             margin-top: 0;
             color: #1e3c72;
@@ -188,12 +190,10 @@
             font-weight: bold;
             margin-bottom: 10px;
         }
-
         .service-item p {
             font-size: 16px;
             color: #555;
         }
-
         .testimonials {
             background: linear-gradient(135deg, #1e3c72, #2a5298);
             color: white;
@@ -202,12 +202,10 @@
             margin-top: 40px;
             box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
         }
-
         .testimonials .section-title h2, 
         .testimonials .section-title p {
             color: white;
         }
-
         .testimonial-item {
             background-color: #2a5298;
             padding: 20px;
@@ -215,21 +213,17 @@
             margin-bottom: 20px;
             transition: background-color 0.3s;
         }
-
         .testimonial-item:hover {
             background-color: #1e3c72;
         }
-
         .testimonial-item h3 {
             color: #ffef00;
             margin-top: 0;
         }
-
         .testimonial-item p {
             margin: 10px 0 0 0;
             color: #ddd;
         }
-
         .contact-info {
             margin-top: 30px;
             background-color: #1e3c72;
@@ -239,16 +233,13 @@
             text-align: center;
             animation: pulse 2s infinite;
         }
-
         .contact-info h2 {
             margin: 0 0 10px 0;
         }
-
         .contact-info p {
             margin: 5px 0;
             font-size: 18px;
         }
-
         .contact-info a {
             color: white;
             font-weight: bold;
@@ -258,11 +249,9 @@
             margin-top: 10px;
             transition: color 0.3s, transform 0.3s;
         }
-
         .contact-info a:hover {
             color: yellow;
         }
-
         footer {
             background-color: #1e3c72;
             color: white;
@@ -284,18 +273,15 @@
             padding: 10px;
             display: none;
         }
-
         @keyframes fadeIn {
             from { opacity: 0; }
             to { opacity: 1; }
         }
-
         @keyframes pulse {
             0% { transform: scale(1); }
             50% { transform: scale(1.05); }
             100% { transform: scale(1); }
         }
-
         @media (max-width: 768px) {
             .service-item {
                 flex: 1 1 100%; /* Full width on mobile */
@@ -326,105 +312,117 @@
 </head>
 <body>
 
-<header>
-    <div class="header-content">
-        <h1>
-            <a href="https://sedotlimbah.my.id">
-                <img src="images/logo.png" alt="Sinar Jaya Limbah" style="height: 50px;">
-            </a>
-        </h1>
-        <div class="menu-toggle" id="mobile-menu">
-            <div class="bar"></div>
-            <div class="bar"></div>
-            <div class="bar"></div>
+    <header>
+        <div class="header-content">
+            <h1>
+                <a href="https://sedotlimbah.my.id">
+                    <img src="images/logo.png" alt="Sinar Jaya Limbah" style="height: 50px;">
+                </a>
+            </h1>
+            <div class="menu-toggle" id="menu-toggle">
+                <div class="bar"></div>
+                <div class="bar"></div>
+                <div class="bar"></div>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="#services">Layanan</a></li>
+                    <li><a href="#testimonials">Testimoni</a></li>
+                    <li><a href="#contact">Hubungi Kami</a></li>
+                </ul>
+            </nav>
         </div>
-        <nav>
-            <ul id="menu-list">
-                <li><a href="#services">Layanan</a></li>
-                <li><a href="#testimonials">Testimoni</a></li>
-                <li><a href="#contact">Kontak</a></li>
-            </ul>
-        </nav>
-    </div>
-</header>
+    </header>
 
-<div class="container">
-    <div class="section-title">
-        <h2>Selamat Datang di Jasa Sedot WC Profesional</h2>
-        <p>Kami siap membantu Anda dengan layanan terbaik!</p>
-    </div>
+    <div class="container">
+        <div class="section-title" id="services">
+            <h2>Layanan Kami</h2>
+            <p>Kami menyediakan berbagai layanan untuk memenuhi kebutuhan Anda dengan harga terjangkau dan hasil yang memuaskan.</p>
+            <p>Wilayah kami mencakup area <strong>Se-Jabodetabek</strong></p>
+        </div>
 
-    <div class="services" id="services">
+    <div class="services">
+            <div class="service-item">
+                <h3>Sedot WC</h3>
+                <p>Kami menyediakan layanan sedot WC untuk rumah, kantor, dan tempat umum dengan peralatan modern dan tenaga ahli.</p>
+            </div>
         <div class="service-item">
-            <h3>Jasa Sedot WC</h3>
-            <p>Kami menyediakan layanan sedot WC dengan cepat dan aman.</p>
+            <h3>Perbaikan Saluran</h3>
+            <p>Layanan perbaikan saluran mampet yang efektif untuk segala jenis masalah saluran air di rumah atau tempat usaha Anda.</p>
         </div>
         <div class="service-item">
-            <h3>Pembuangan Limbah</h3>
-            <p>Limbah Anda akan kami buang dengan cara yang ramah lingkungan.</p>
-        </div>
-        <div class="service-item">
-            <h3>Perawatan Septic Tank</h3>
-            <p>Kami menawarkan perawatan septic tank untuk mencegah masalah di kemudian hari.</p>
+                <h3>Perawatan Septic Tank</h3>
+                <p>Kami menawarkan layanan perawatan septic tank secara berkala untuk menjaga kebersihan dan fungsi yang optimal.</p>
+            </div>
         </div>
     </div>
 
     <div class="testimonials" id="testimonials">
         <div class="section-title">
             <h2>Testimoni Pelanggan</h2>
-            <p>Berikut adalah beberapa testimoni dari pelanggan kami yang puas.</p>
+            <p>Apa yang pelanggan katakan tentang layanan kami?</p>
         </div>
         <div class="testimonial-item">
-            <h3>Joko</h3>
-            <p>"Layanan sangat memuaskan dan cepat, saya sangat merekomendasikan!"</p>
+            <h3>Andi, Jakarta</h3>
+            <p>"Pelayanan cepat dan hasil memuaskan. Sangat profesional!"</p>
         </div>
         <div class="testimonial-item">
-            <h3>Siti</h3>
-            <p>"Teknisi yang ramah dan profesional. Sangat puas dengan hasilnya."</p>
+            <h3>Siti, Depok</h3>
+            <p>"Harganya terjangkau dan timnya sangat ramah. Akan saya rekomendasikan ke teman-teman!"</p>
         </div>
         <div class="testimonial-item">
-            <h3>Budi</h3>
-            <p>"Harga yang bersaing dengan layanan yang luar biasa. Terima kasih!"</p>
+            <h3>Budi, Tangerang</h3>
+            <p>"Saluran air saya sudah lancar kembali. Terima kasih Sinar Jaya Limbah!"</p>
         </div>
     </div>
 
-    <div class="contact-info" id="contact">
+    <div class="container contact-info" id="contact">
         <h2>Hubungi Kami</h2>
-        <p>Untuk informasi lebih lanjut dan pemesanan, hubungi kami:</p>
-        <p>Telp: 0812-3456-7890</p>
-        <p>Email: info@jasasedotwc.com</p>
-        <a href="mailto:info@jasasedotwc.com">Kirim Email</a>
+        <p>Untuk informasi lebih lanjut, silakan hubungi kami:</p>
+        <p>📞 Telepon: 0812-9393-996</p>
+        <p>📧 Email: sinarjaya@gmail.com</p>
+        <p>📱 WhatsApp: 0812-9393-996</p>
+        <p><a href="https://wa.me/628129393996?text=Halo,%20Saya%20ingin%20bertanya%20mengenai%20Sedot%20WC%20dan%20lainnya.">Konsultasi GRATIS Disini</a></p>
     </div>
-</div>
 
-<footer>
-    <p>&copy; 2024 Jasa Sedot WC Profesional. Semua hak dilindungi.</p>
-</footer>
+    <footer>
+        <p>&copy; 2024 Sinar Jaya Limbah. All rights reserved.</p>
+    </footer>
 
-<button class="back-to-top" id="back-to-top">Back to Top</button>
+    <button class="back-to-top" id="backToTop">Kembali ke Atas</button>
 
-<script>
-    const mobileMenu = document.getElementById('mobile-menu');
-    const nav = document.querySelector('nav');
-    const menuList = document.getElementById('menu-list');
+    <script>
+        // Toggle hamburger menu
+        const menuToggle = document.querySelector('#menu-toggle');
+        const body = document.body;
 
-    mobileMenu.addEventListener('click', () => {
-        menuList.classList.toggle('active');
-    });
+        menuToggle.addEventListener('click', () => {
+            body.classList.toggle('nav-active');
+        });
 
-    const backToTopButton = document.getElementById('back-to-top');
-    window.onscroll = function() {
-        if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
-            backToTopButton.style.display = "block";
-        } else {
-            backToTopButton.style.display = "none";
-        }
-    };
-    backToTopButton.onclick = function() {
-        document.body.scrollTop = 0;
-        document.documentElement.scrollTop = 0;
-    };
-</script>
+        // Smooth Scroll
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
 
+        // Back to top button
+        const backToTopButton = document.getElementById("backToTop");
+        window.onscroll = function() {
+            if (document.body.scrollTop > 200 || document.documentElement.scrollTop > 200) {
+                backToTopButton.style.display = "block";
+            } else {
+                backToTopButton.style.display = "none";
+            }
+        };
+
+        backToTopButton.addEventListener("click", function() {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+    </script>
 </body>
 </html>
