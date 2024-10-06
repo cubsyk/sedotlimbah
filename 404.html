@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Website Tidak Tersedia</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f0f4f8;
+            color: #333;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            text-align: center;
+            background-image: linear-gradient(to bottom, #e3f2fd, #bbdefb);
+        }
+
+        .container {
+            padding: 30px;
+            border: 1px solid #90caf9;
+            border-radius: 12px;
+            background-color: #ffffff;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            animation: scaleUp 1.5s ease-in-out;
+            max-width: 500px;
+            width: 90%;
+        }
+
+        h1 {
+            font-size: 2.8em;
+            margin: 0;
+            color: #0d47a1;
+            animation: slideIn 1.5s ease-out 0.5s; /* delayed by 0.5 seconds */
+            animation-fill-mode: forwards;
+            opacity: 0; /* start hidden */
+        }
+
+        p {
+            font-size: 1.2em;
+            color: #555;
+            animation: fadeIn 2s ease-in-out 1.5s; /* delayed by 1.5 seconds */
+            animation-fill-mode: forwards;
+            opacity: 0; /* start hidden */
+        }
+
+        .btn {
+            margin-top: 20px;
+            padding: 12px 25px;
+            font-size: 1em;
+            color: #ffffff;
+            background-color: #1976d2;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            text-decoration: none;
+            transition: background-color 0.3s ease-in-out, transform 0.3s;
+        }
+
+        .btn:hover {
+            background-color: #1565c0;
+            transform: translateY(-5px);
+        }
+
+        @keyframes fadeIn {
+            0% {
+                opacity: 0;
+            }
+            100% {
+                opacity: 1;
+            }
+        }
+
+        @keyframes scaleUp {
+            0% {
+                transform: scale(0.8);
+            }
+            100% {
+                transform: scale(1);
+            }
+        }
+
+        @keyframes slideIn {
+            0% {
+                transform: translateY(-50px);
+                opacity: 0;
+            }
+            100% {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Oups! Halaman Tidak Tersedia</h1>
+        <p>Maaf, halaman yang Anda cari tidak tersedia atau terjadi kesalahan.</p>
+        <p>Silakan coba lagi nanti.</p>
+        <a href="index.html" class="btn">Kembali</a>
+    </div>
+</body>
+</html>
