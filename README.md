@@ -1,1 +1,1 @@
-**Please do not copy or change the coding content**
+Dilarang keras untuk mengambil atau menggunakan sumber dari halaman ini tanpa izin. Semua konten yang ada di situs ini dilindungi oleh hak cipta.

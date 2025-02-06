@@ -1,0 +1,1028 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="robots" content="noindex, nofollow">
+    <title>Darkness - Goreplix</title>
+    <link rel="icon" href="images/favicon.ico" type="image/x-icon">
+    <style>
+        html {
+            scroll-behavior: smooth; /* Menambahkan efek scroll halus */
+        }
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #121212;
+            color: #e0e0e0;
+            overflow-x: hidden; /* Prevent horizontal overflow */
+        }
+        header {
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            justify-content: space-between; /* Align items */
+            background-color: #1e1e1e;
+            color: red;
+            padding: 20px;
+            height: 40px;
+            border-bottom: 2px solid red;
+            transition: background-color 0.3s ease; /* Smooth transition for background */
+        }
+        header:hover {
+            background-color: #3a3a3a; /* Darker header on hover */
+        }
+        .logo {
+            width: 130px;
+            height: auto;
+            margin-left: -15px;
+        }  
+        /* Styling untuk form pencarian */
+        .search-form {
+            position: relative;
+            max-width: 100%;
+            margin: 20px 15px;
+            font-family: 'Arial', sans-serif;
+        }
+
+        #search {
+            width: 100%;
+            padding: 12px 20px;
+            border: 2px solid red;
+            border-radius: 5px;
+            font-size: 16px;
+            outline: none;
+            transition: border-color 0.3s ease;
+        }
+
+        #search:focus {
+            border-color: rgb(105, 54, 54);
+        }
+
+        /* Kotak saran */
+        .suggestions-box {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            width: 117%;
+            background-color: #fff;
+            border: 2px solid #ccc;
+            border-radius: 5px;
+            max-height: 250px;
+            overflow-y: auto;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+            z-index: 9999;
+            display: none;
+        }
+
+        .suggestions-box div {
+            padding: 10px;
+            font-size: 16px;
+            color: black;
+            cursor: pointer;
+            transition: background-color 0.3s ease, color 0.3s ease;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .suggestions-box div:last-child {
+            border-bottom: none;
+        }
+
+        .suggestions-box div:hover {
+            background-color: #492424;
+            color: #ffffff;
+        }
+
+        /* Menampilkan kotak saran jika ada input */
+        .suggestions-box.show {
+            display: block;
+        }
+
+        /* Responsif untuk tampilan mobile */
+        @media (max-width: 768px) {
+        .search-form {
+            max-width: 100%;
+            margin: 15px;
+        }
+
+        #search {
+            font-size: 14px;
+            padding: 10px 15px;
+        }
+
+        .suggestions-box {
+            max-height: 200px; /* Lebih pendek untuk perangkat kecil */
+            width: 114%;
+            font-size: 14px;
+        }
+    }
+
+        /* Responsif untuk tampilan sangat kecil (misalnya ponsel dengan layar kecil) */
+        @media (max-width: 480px) {
+        #search {
+            font-size: 12px;
+            padding: 8px 12px;
+        }
+
+        .suggestions-box {
+            max-height: 150px; /* Lebih kecil lagi untuk layar sangat kecil */
+            width: 114%;
+            font-size: 12px;
+        }
+    }
+ 
+        nav {
+            display: flex;
+            text-align: center;
+            gap: 20px; /* Space between nav items */
+        }
+        nav a {
+            color: red;
+            text-decoration: none;
+            font-weight: bold;
+            position: relative; /* For the underline effect */
+            transition: color 0.3s ease; /* Smooth color transition */
+        }
+        nav a:hover {
+            color: #fff; /* Change color on hover */
+        }
+        nav a::after {
+            content: '';
+            position: absolute;
+            left: 50%;
+            bottom: -5px;
+            width: 0;
+            height: 2px;
+            background-color: #fff;
+            transition: width 0.3s ease, left 0.3s ease;
+        }
+        nav a:hover::after {
+            width: 100%; /* Full width on hover */
+            left: 0; /* Move to the left */
+        }
+        .hamburger {
+            display: none; /* Hidden by default */
+            flex-direction: column;
+            cursor: pointer;
+        }
+        .bar {
+            height: 3px;
+            width: 25px;
+            background-color: red;
+            margin: 3px 0;
+            transition: 0.4s;
+        }
+        h1 {
+            margin: 0;
+            font-size: 30px;
+        }
+        .disclaimer {
+            background-color: red;
+            color: #fff;
+            padding: 10px;
+            text-align: center;
+            font-weight: bold;
+            margin-bottom: 20px;
+            animation: fadeIn 0.5s; /* Fade in animation */
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        main {
+            padding: 20px;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+        .video-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            justify-content: space-between;
+            max-width: 800px; /* Mengurangi lebar container */
+            margin: 0 auto; /* Memastikan kontainer berada di tengah */
+        }
+        .video-item {
+            background-color: #222;
+            padding: 15px; /* Mengurangi padding untuk mengecilkan ukuran */
+            border-radius: 8px;
+            flex: 1;
+            text-align: center;
+            min-width: 200px; /* Mengurangi ukuran minimum video item */
+            display: flex;
+            flex-direction: column; /* Menata gambar, deskripsi, dan tombol secara vertikal */
+            justify-content: space-between; /* Memberikan jarak antar elemen */
+        }
+        .video-item img {
+            width: 100%;          /* Membuat gambar mengisi lebar kontainer secara penuh */
+            height: 200px;        /* Sesuaikan tinggi agar gambar lebih proporsional */
+            object-fit: cover;    /* Memastikan gambar mengisi area tanpa merusak proporsi */
+            border-radius: 8px;
+            transition: transform 0.3s ease;
+        }
+        .video-item img:hover {
+            transform: scale(1.03); /* Zoom image on hover */
+        }
+        .video-item h3 {
+            color: red;
+            font-size: 18px; /* Mengurangi ukuran font judul */
+            transition: color 0.3s ease;
+        }
+        .video-item p {
+            margin: 0px 0;
+        }
+        .video-item a {
+            color: red;
+            text-decoration: none;
+            font-weight: bold;
+            display: inline-block;
+            margin-top: 10px;
+            transition: color 0.3s ease;
+            position: relative;
+        }
+        .video-item a:hover {
+            color: #fff;
+        }
+        .video-item a::after {
+            content: '';
+            position: absolute;
+            left: 50%;
+            bottom: -5px;
+            width: 0;
+            height: 2px;
+            background-color: #fff;
+            transition: width 0.3s ease, left 0.3s ease;
+        }
+        .video-item a:hover::after {
+            width: 100%;
+            left: 0;
+        }
+        footer {
+            background-color: #1e1e1e;
+            color: #fff;
+            text-align: center;
+            padding: 20px;
+            border-top: 2px solid red;
+            margin-top: 20px;
+        }
+        /* Styling untuk konten tambahan yang akan ditampilkan setelah klik */
+        .additional-content {
+            margin-top: 20px;
+            padding: 0;
+            border-radius: 8px;
+        }
+        .additional-content a {
+            margin-bottom: 10px;
+        }
+        .additional-content p {
+            text-align: justify;
+        }
+        .read-more {
+            background-color: red; /* Warna dasar tombol */
+            color: white; /* Warna teks */
+            border: none;
+            padding: 10px 20px;
+            font-size: 12px;
+            border-radius: 8px; /* Membuat tombol memiliki sudut melengkung */
+            cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Tambahkan bayangan */
+        }
+        .read-more:hover {
+            background-color: rgb(105, 54, 54); /* Warna tombol saat hover */
+            box-shadow: 0 6px 8px rgba(0, 0, 0, 0.2); /* Bayangan lebih tebal saat hover */
+        }
+        /* Responsiveness */
+        @media (max-width: 768px) {
+        nav {
+            display: none; /* Hide nav by default */
+            flex-direction: column; /* Stack nav items */
+            position: absolute; /* Positioning */
+            top: 70px; /* Below the header */
+            right: 0; /* Align to the right */
+            background-color: #1e1e1e; /* Background color */
+            border-radius: 5px; /* Rounded corners */
+            z-index: 1000; /* Above other elements */
+            width: 200px; /* Width of the menu */
+            padding: 10px; /* Padding for the menu */
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5); /* Shadow for dropdown */
+        }
+        nav.active {
+            display: flex; /* Show nav when active */
+        }
+        .hamburger {
+            display: flex; /* Show hamburger icon */
+        }          
+        .hamburger.active .bar:nth-child(1) {
+            transform: rotate(-45deg) translate(-5px, 6px); /* Top bar */
+        }
+        .hamburger.active .bar:nth-child(2) {
+            opacity: 0; /* Middle bar disappears */
+        }
+        .hamburger.active .bar:nth-child(3) {
+            transform: rotate(45deg) translate(-5px, -6px); /* Bottom bar */
+        }
+        .video-item {
+            flex-basis: 100%; /* Full width on small screens */
+        }
+        .video-item h3 {
+            font-size: 16px; /* Smaller font size on small screens */
+        }
+        /* Styling untuk konten tambahan yang akan ditampilkan setelah klik */
+        .additional-content {
+            margin-top: 20px;
+            padding: 0;
+            border-radius: 8px;
+        }
+        .additional-content a {
+            margin-bottom: 10px;
+        }
+        .additional-content p {
+            text-align: justify;
+        }
+    }
+    </style>
+    <script type='text/javascript' src='//pl25031541.profitablecpmrate.com/a5/2d/30/a52d30327145f654412e1b57fcb72726.js'></script>
+</head>
+<body>
+    <header>
+        <img src="images/logo.gif" alt="Logo" class="logo">
+        <div class="hamburger" id="hamburger" onclick="toggleNav(this)">
+            <div class="bar"></div>
+            <div class="bar"></div>
+            <div class="bar"></div>
+        </div>
+
+        <form action="/search" method="get" class="search-form">
+            <input type="text" id="search" name="query" placeholder="Cari judul video..." onkeyup="searchSuggestions()" autocomplete="off">
+            <div id="suggestions-box" class="suggestions-box"></div>
+          </form>
+
+        <nav id="nav">
+            <a href="https://goreplix.site">Beranda</a>
+            <a href="./darkness">Darkness</a>
+            <a href="./incident">Incident</a>
+            <a href="./contact">Kontak</a>
+        </nav>
+    </header>
+
+    <main>
+        <h1>Darkness</h1>
+        <p>Lihat juga: <a href="https://www.profitablecpmrate.com/e9j55vq9zr?key=5a5e5b7137e32bd8a7b8bcfa4148a25b" style="color: blue;">video terbaru</a></p>
+        <section class="video-container">
+            <div class="video-item">
+                <img src="images/dark55.jpeg" alt="thumb">
+                <h3>Pria Tionghoa Gila Menusuk Wanita Hingga Meninggal</h3>
+                <div class="additional-content" style="display: none;">
+                <p>Dua wanita ditikam hingga tewas dalam aksi penembakan massal yang mengejutkan dan acak di sebuah pusat perbelanjaan di Hong Kong pada hari Jumat, sebelum pria yang menyerang mereka berhasil ditundukkan dan ditangkap ketika polisi tiba. Pelaku penyerangan dan korban tampaknya tidak saling kenal, menurut Eileen Chung Lai-yee, seorang perwira tinggi dari markas besar polisi daerah Kowloon Timur, yang mengatakan bahwa penyelidikan awal mereka tidak menemukan "bukti konkret" yang menunjukkan kedua wanita yang meninggal itu memiliki hubungan apa pun dengan pria pengangguran berusia 39 tahun itu sebelum penyerangan. "Hubungan antara korban dan tersangka, serta motivasinya, akan menjadi fokus penyelidikan kami," kata Chung dalam sebuah pengarahan tepat setelah tengah malam pada hari Jumat.</p>
+                <a href="https://pastelink.net/2nwsm1mb" target="_blank">Lihat Video Disini</a>
+            </div>
+                <button class="read-more">Baca Selengkapnya</button>
+            </div>
+            <div class="video-item">
+                <img src="images/dark54.jpeg" alt="thumb">
+                <h3>Pria Dibacok 21 kali Dengan Parang</h3>
+                <div class="additional-content" style="display: none;">
+                <p>Peristiwa ini terjadi di Kota Long Xuyen, An Giang, Vietnam, Sekelompok remaja, bersenjata parang, mengejar dan berulang kali menebas seorang pelari. Korban yang mencoba melarikan diri ditebas sebanyak 21 kali di kepala, leher, kaki, dan punggungnya dalam waktu satu menit, mereka kemudian melarikan diri dari tempat kejadian perkara dan meninggalkan korban berdarah sampai mati. Dari apa yang saya pahami, pembunuhan itu sebenarnya berafiliasi dengan geng, karena terjemahan dari video ini kurang lebih seperti ini: Pria dengan pisau: "Siapa yang melakukannya?" Hoodie hitam: "Itu bukan aku" x2 keduanya berhenti berjalan Pria dengan pisau: "Berikan padaku benda itu sekarang" x2 Hoodie hitam: "Itu bukan aku, sumpah" x2 melanjutkan dengan meretas pria berkerudung hitam itu sementara dia terus menyangkal bahwa bukan dia yang mengambil "itu" dari mereka Laporan berita yang menandakan bahwa ini bukan kejadian tunggal: "Pada tanggal 6 Januari, sumber Tuoi Tre Online mengatakan bahwa pasukan polisi Provinsi An Giang sedang berkoordinasi untuk menangkap sekelompok remaja yang membawa pisau rakitan yang berulang kali menebas orang, sehingga menimbulkan kemarahan publik. Peristiwa itu terjadi sekitar pukul 1:00 dini hari di hari yang sama, di pasar distrik My Xuyen, kota Long Xuyen, provinsi An Giang dan terekam oleh kamera keamanan rumah-rumah penduduk. Saat itu, sekelompok remaja yang terdiri dari sedikitnya 3 orang mengendarai sepeda motor mengejar remaja lain yang sedang joging... "</p>
+                <a href="https://pastelink.net/d6y0vm0h" target="_blank">Lihat Video Disini</a>
+            </div>
+                <button class="read-more">Baca Selengkapnya</button>
+            </div>
+            <div class="video-item">
+                <img src="images/dark53.jpeg" alt="thumb">
+                <h3>Pria Dipukuli Sampai Mati Dengan Palu</h3>
+                <div class="additional-content" style="display: none;">
+                <p>Vietnam</p>
+                <a href="https://pomf2.lain.la/f/bx8p3n2w.mp4" target="_blank">Lihat Video Disini</a>
+            </div>
+                <button class="read-more">Baca Selengkapnya</button>
+            </div>
+            <div class="video-item">
+                <img src="images/dark52.jpeg" alt="thumb">
+                <h3>Seorang Pria Dibunuh Secara Brutal Menggunakan Parang</h3>
+                <div class="additional-content" style="display: none;">
+                <p>Tidak ada deskripsi.</p>
+                <a href="https://pomf2.lain.la/f/4ia35322.mp4" target="_blank">Lihat Video Disini</a>
+            </div>
+                <button class="read-more">Baca Selengkapnya</button>
+            </div>
+            <div class="video-item">
+                <img src="images/dark51.jpeg" alt="thumb">
+                <h3>Suami Menusuk Istrinya Hingga Meninggal</h3>
+                <div class="additional-content" style="display: none;">
+                <p>Seorang perempuan dibunuh oleh suaminya dengan tusukan pisau pada Kamis sore (30) di lingkungan Morada Nova, di Confresa. Polisi Militer merilis foto-foto tersangka yang masih buron. Rekaman kamera keamanan menunjukkan korban duduk di sebuah bar di Jalan Ulisses Guimarães, memangku putranya. Seorang anak lain, yang juga diidentifikasi sebagai putrinya, duduk di sampingnya. Setelah terjadi pertengkaran di dalam tempat itu, wanita itu diserang dengan tusukan pisau di bagian leher. Dia tidak selamat dari luka-lukanya dan meninggal di tempat kejadian. Video tersebut juga menunjukkan tersangka melarikan diri menggunakan Fiat Uno berwarna perak. Setelah kejadian tersebut, Polisi Militer dan tim Identifikasi Teknis dan Forensik Resmi (Politec) dipanggil. Menurut Semana7, pria tersebut sedang dicari di kawasan hutan di kotamadya tersebut.</p>
+                <a href="https://pastelink.net/la42acyg" target="_blank">Lihat Video Disini</a>
+            </div>
+                <button class="read-more">Baca Selengkapnya</button>
+            </div>
+            <div class="video-item">
+                <img src="images/dark50.jpeg" alt="thumb">
+                <h3>Pria di Kursi Roda Ditembak Pembunuh Bayaran di Rumah Sakit</h3>
+                <div class="additional-content" style="display: none;">
+                <p>Seorang pasien berusia 37 tahun ditembak mati pada Minggu pagi (24), saat ia hendak dipulangkan setelah dirawat di Rumah Sakit Santo Amaro (HSA), di Guarujá, di pantai São Paulo. Kamera pemantau di lokasi merekam aksi dua pelaku yang menembak pasien di hadapan tim medis. Sebuah video yang diperoleh G1 pada Minggu sore memperlihatkan seluruh aksi tersebut, yang terjadi sekitar pukul 11:30 pagi di salah satu pintu masuk rumah sakit. Gambar-gambar tersebut memperlihatkan pasien, yang diidentifikasi sebagai Gilianderson dos Santos, berada di kursi roda, mengenakan topi gelap dan pakaian biru. Ia hendak keluar dari bangsal Traumatologi rumah sakit tersebut. Dua karyawan rumah sakit berada di lokasi kejadian. Mereka keluar melalui pintu kamar, tetapi kembali dalam waktu kurang dari sepuluh detik. Tepat di belakang mereka, dua pria lainnya masuk, sudah membawa senjata di tangan mereka. Para tersangka bersenjata lengkap dan mengenakan helm sepeda motor sehingga sulit diidentifikasi. Pasangan itu melepaskan sekitar enam tembakan ke arah Gilianderson. Beberapa tembakan mengenai kepala pasien dan beberapa lainnya mengenai perutnya. Setelah serangan itu, ia jatuh dari kursi rodanya. Seluruh insiden itu berlangsung kurang dari satu menit. Menurut Rumah Sakit Santo Amaro, Gilianderson dirawat di unit tersebut pada Jumat malam (22) dengan luka tembak di pantat dan kaki. Ketika ia tiba di Ruang Gawat Darurat, Polisi dipanggil dan membuat laporan polisi</p>
+                <a href="https://videy.co/v?id=6DGDdiFx1" target="_blank">Lihat Video Disini</a>
+            </div>
+                <button class="read-more">Baca Selengkapnya</button>
+            </div>
+            <div class="video-item">
+                <img src="images/dark49.jpeg" alt="thumb">
+                <h3>Pencuri Ditembak di Tangan dan Kaki</h3>
+                <div class="additional-content" style="display: none;">
+                <p>Tidak ada info lebih lanjut.</p>
+                <a href="https://videy.co/v?id=iWg3ghyU1" target="_blank">Lihat Video Disini</a>
+            </div>
+                <button class="read-more">Baca Selengkapnya</button>
+            </div>
+            <div class="video-item">
+                <img src="images/dark48.jpeg" alt="thumb">
+                <h3>Seorang Pria Menusuk Istrinya Hingga Meninggal</h3>
+                <div class="additional-content" style="display: none;">
+                <p>Seorang pria berusia 40 tahun yang secara brutal menikam istrinya hingga tewas di siang bolong di Vijay Vihar, Delhi, ditangkap pada hari Sabtu. Tim polisi dari Vijay Vihar berhasil menangkap tersangka dan menemukan pisau berlumuran darah. Korban, yang tergeletak di pinggir jalan dalam genangan darah, dibawa ke rumah sakit Sanjay Gandhi dengan ambulans, dan dinyatakan meninggal saat tiba di rumah sakit. Selama interogasi, si pembunuh mengungkapkan bahwa dia baru saja menikahi korban, yang dulu bekerja di rumah sakit. Dia memintanya untuk berhenti dari pekerjaannya dan tinggal di rumah serta mengurus rumah, tetapi dia menolaknya. Polisi mengatakan hal ini membuatnya curiga bahwa istrinya berselingkuh. Dia meninggalkannya dan kembali ke rumah orang tuanya. Dia memutuskan untuk membunuh istrinya, jadi dia "membeli pisau dari pasar untuk menjalankan rencananya", Pada tanggal 10 April 2021, sekitar pukul 2 siang, saat istrinya pulang kerja, dia menikamnya dengan brutal. Dia menghubunginya melalui "layanan perjodohan" di Delhi, dan mereka memutuskan untuk menikah. Namun, pernikahan mereka mengalami masa sulit segera setelah menikah, kata polisi.</p>
+                <a href="https://pastelink.net/icwpros0" target="_blank">Lihat Video Disini</a>
+            </div>
+                <button class="read-more">Baca Selengkapnya</button>
+            </div>
+            <div class="video-item">
+                <img src="images/dark47.jpeg" alt="thumb">
+                <h3>Kartel Narkoba Meksiko Menembaki Seorang Pria</h3>
+                <div class="additional-content" style="display: none;">
+                <p>Tidak ada info lebih lanjut.</p>
+                <a href="https://videy.co/v?id=4xDAN5BJ1" target="_blank">Lihat Video Disini</a>
+            </div>
+                <button class="read-more">Baca Selengkapnya</button>
+            </div>
+            <div class="video-item">
+                <img src="images/dark46.jpeg" alt="thumb">
+                <h3>Eksekusi 2 Pria Oleh Tentara</h3>
+                <div class="additional-content" style="display: none;">
+                <p>2 pria terikat berjalan dipimpin oleh seorang prajurit bersenjata․ Lalu ia membidik dan menembak bagian belakang kepala seseorang․ Ketika bergerak menuju batas kedua, seorang pria bertindak penuh dan menyelam di lantai seolah-olah dia tertembak tetapi Itu tidak menipu prajurit itu, prajurit tetap menembak orang itu 4-5 kali,</p>
+                <a href="https://videy.co/v?id=BO0Rj3Z31" target="_blank">Lihat Video Disini</a>
+            </div>
+                <button class="read-more">Baca Selengkapnya</button>
+            </div>
+            <div class="video-item">
+                <img src="images/dark45.jpeg" alt="thumb">
+                <h3>Ibu Dibunuh di Dekat Anaknya</h3>
+                <div class="additional-content" style="display: none;">
+                <p>Tidak ada info lebih lanjut, penembakan terjadi detik 0:45</p>
+                <a href="https://pomf2.lain.la/f/lhfq34g6.mp4" target="_blank">Lihat Video Disini</a>
+            </div>
+                <button class="read-more">Baca Selengkapnya</button>
+            </div>
+            <div class="video-item">
+                <img src="images/dark44.jpeg" alt="thumb">
+                <h3>Seorang Wanita Menusuk Pria di Siang Hari.</h3>
+                <div class="additional-content" style="display: none;">
+                <p>Pembunuhan mengerikan tercatat pada Sabtu pagi, 18 Januari 2025, di lingkungan Ospina, El Carmen de Viboral (Antioquia), yang menggemparkan masyarakat.
+                   Peristiwa tersebut terekam kamera keamanan di sektor tersebut sekitar pukul 9:30 pagi, yang mana terlihat seorang pria, yang diidentifikasi sebagai Juan Guillermo Henao Gómez, 49 tahun, sedang membawa tongkat, untuk menganiaya seorang wanita yang membawa senjata tajam.
+                   Pada suatu saat, pria itu kehilangan keseimbangan dan tersandung, jatuh terlentang di tengah jalan, situasi yang dimanfaatkan wanita itu untuk menyerangnya berulang kali. Dilaporkan bahwa setidaknya ada 20 luka tusuk yang diterima korban, yang tampaknya meninggal di tempat.
+                   Korban diduga mengaku di tempat kejadian perkara bahwa ia membunuh pria tersebut karena ia diduga telah menganiaya putrinya yang masih di bawah umur. Namun, keluarga korban membantah informasi tersebut.
+                   Tuduhan yang mengarah kepada Henao atas dugaan pelecehan seksual terhadap putri pelaku yang cacat tidak sesuai dengan kenyataan, kata orang-orang yang dicintainya, sebagaimana dikutip oleh My East.
+                   Mereka juga menambahkan bahwa mereka mengenal wanita tersebut, karena mereka pasti pernah berkonflik dengannya sebelumnya. Namun, pihak berwenang yang berwenang sedang menyelidiki untuk menentukan motif kejahatan tersebut.</p>
+                <a href="https://videy.co/v?id=WI8D43XS1" target="_blank">Lihat Video Disini</a>
+            </div>
+                <button class="read-more">Baca Selengkapnya</button>
+            </div>
+            <div class="video-item">
+                <img src="images/dark43.jpeg" alt="thumb">
+                <h3>Kongo Eksekusi Lebih Dari 170 Narapidana</h3>
+                <div class="additional-content" style="display: none;">
+                <p>Lebih dari 170 narapidana hukuman mati diterbangkan dari ibu kota Kongo ke penjara keamanan tinggi di utara tempat mereka akan dieksekusi, kata otoritas Kongo.
+                   Tujuh puluh narapidana diangkut pada hari Minggu, kata Menteri Kehakiman Kongo Constant Mutamba, menambah 102 narapidana lain yang telah dikirim ke penjara Angenga di provinsi Mongala utara.
+                   Para pria tersebut telah dihukum karena perampokan bersenjata dan secara lokal dikenal sebagai "Kulunas" atau "bandit kota." Mereka berusia antara 18 dan 35 tahun, kata Mutamba dalam sebuah pernyataan. Ia tidak mengatakan kapan eksekusi akan dilakukan.
+                   Beberapa pihak menyambut baik tindakan tersebut sebagai sarana memulihkan ketertiban dan keamanan di kota, sementara pihak lain mengkhawatirkan risiko penyalahgunaan dan pelanggaran hak asasi manusia.
+                   "Kami menyambut baik keputusan menteri ini karena akan membantu mengakhiri kejahatan di perkotaan. Mulai pukul 8 malam, Anda tidak dapat bergerak bebas karena takut bertemu Kuluna," kata Fiston Kakule, warga kota Goma di bagian timur.
+                   Espoir Muhinuka, seorang aktivis hak asasi manusia, memperingatkan kemungkinan eksekusi di luar hukum dan menyerukan penghormatan ketat terhadap prosedur peradilan dan jaminan fundamental. Ia khawatir tekanan politik dapat menyebabkan hukuman yang tidak adil dan eksekusi sewenang-wenang.
+                   "Situasi di Republik Demokratik Kongo sangat kompleks dan memerlukan pendekatan multidimensi. Perjuangan melawan geng-geng perkotaan harus berjalan seiring dengan upaya untuk memerangi kemiskinan, pengangguran, dan pengucilan sosial, yang sering kali menjadi faktor penyebab kejahatan," katanya.
+                   Kongo menghapus hukuman mati pada tahun 1981, tetapi diberlakukan kembali pada tahun 2006. Eksekusi terakhir dilakukan pada tahun 2003.
+                   Pada bulan Maret 2024, pemerintah Kongo mengumumkan dimulainya kembali hukuman mati dalam kasus pengkhianatan oleh personel militer. Pada bulan Mei, delapan tentara dijatuhi hukuman mati, dan pada bulan Juli, 25 tentara dihukum karena pelanggaran serupa.</p>
+                <a href="https://pastelink.net/bpd2byo3" target="_blank">Lihat Video Disini</a>
+            </div>
+                <button class="read-more">Baca Selengkapnya</button>
+            </div>
+            <div class="video-item">
+                <img src="images/dark42.jpeg" alt="thumb">
+                <h3>Sergey Kirilov Gantung Diri Saat Panggilan Skype</h3>
+                <div class="additional-content" style="display: none;">
+                <p>Sergey Kirilov (Сергей Кириллов) adalah seorang pria berusia 26 tahun dari Novodvinsk, Rusia, yang bunuh diri dengan cara gantung diri pada tanggal 17 September 2014, dengan menyiarkan langsung aksinya. Sebelum bunuh diri, Sergey Kirilov berpartisipasi dalam forum papan gambar daring bernama 2ch, di mana ia memulai sebuah utas yang menyatakan niatnya untuk bunuh diri dan menyiarkan langsung aksi bunuh dirinya agar dapat ditonton oleh para pengguna. Dalam utas tersebut, ia menceritakan kehidupan di pedesaan dan berbagai masalah pribadinya akhir-akhir ini, seperti ditelantarkan oleh istri dan anaknya, serta konflik keluarga lainnya. Alih-alih menerima dukungan atau dorongan untuk mencari pertolongan, sebagian besar pengguna di forum tersebut mendorongnya untuk melanjutkan aksinya dan memberikan petunjuk tentang cara melakukan streaming langsung bunuh diri tersebut melalui panggilan Skype. Selama panggilan tersebut, Sergey Kirilov menghabiskan bir terakhirnya dan menyesuaikan kamera agar aksi gantung dirinya terlihat. Polisi setempat melaporkan bahwa mereka tidak menerima laporan apa pun tentang insiden tersebut selama siaran. Pakar psikologi percaya bahwa tragedi tersebut dapat dihindari jika pemirsa menolak untuk menonton atau menawarkan dukungan yang sesuai.</p>
+                <a href="https://pastelink.net/jhtuomf7" target="_blank">Lihat Video Disini</a>
+            </div>
+                <button class="read-more">Baca Selengkapnya</button>
+            </div>
+            <div class="video-item">
+                <img src="images/dark41.jpeg" alt="thumb">
+                <h3>Pria Pengangguran Bunuh Diri Dalam Siaran Langsung TV</h3>
+                <div class="additional-content" style="display: none;">
+                <p>Henrique José Paiva da Silva, 51, berasal dari Ceará, yang telah menganggur selama setahun di Cáceres. Sebelum menganggur, ia bekerja sebagai perakit furnitur di Kota Lar dan Gazin. Ia terlihat sangat aktif, termasuk mengendarai sepedanya keliling kota pada akhir pekan.
+                   Namun, ia menjadi pengangguran dan keluarganya pindah, meninggalkannya sendirian dan tertekan. Depresi membuatnya menjadi penyendiri dan ia menjalani kehidupan menyendiri di rumah.
+                   Pada awal Januari 2013, ia memutuskan untuk bunuh diri dan memanjat menara telepon seluler Vivo di Cidade Alta, Cáceres. Ia mencapai setengah menara telepon seluler (25~30m) dan berdiri di sana dengan tidak stabil. Tim berita mulai merekamnya dan ratusan penonton, termasuk teman-temannya, rekan kerja, dan istrinya, menyaksikan kejadian tersebut.
+                   Sekitar pukul 8 pagi, ia melompat dari menara telepon seluler dan jatuh dengan kepala terlebih dulu ke dalam kontainer, dan langsung tewas. Benturan itu begitu kuat sehingga perangkat sinyal telepon seluler mati selama 30 menit.</p>
+                <a href="https://videy.co/v?id=Z3ay12Jg1" target="_blank">Lihat Video Disini</a>
+            </div>
+                <button class="read-more">Baca Selengkapnya</button>
+            </div>
+            <div class="video-item">
+                <img src="images/dark40.jpeg" alt="thumb">
+                <h3>Pria dibunuh oleh mantan istrinya setelah berdiskusi di dalam rumah dan penisnya dipotong.</h3>
+                <div class="additional-content" style="display: none;">
+                <p>Dayana Machado, 33 tahun, ditangkap basah setelah membunuh pasangannya dan memotong alat kelamin pria tersebut
+                   Pada dini hari senin lalu, 07, sebuah rumah di lingkungan Santa Catarina, di wilayah metropolitan kota Rio de Janeiro, menjadi lokasi pembunuhan. Ternyata pada pukul 4 pagi itu, Dayana Cristina Rodrigues Machado, 33, hendak membunuh suaminya dengan tusukan, yang kemudian memotong alat kelamin pria itu.
+                   Menurut berita, wanita itu ditangkap pada sore hari di hari yang sama, dituduh melakukan pembunuhan berencana dan pencemaran nama baik terhadap mayat. Dalam sebuah pernyataan, polisi mengatakan bahwa kasus tersebut sedang diselidiki oleh kantor polisi pembunuhan kota Niterói.
+                   Menurut keterangan pejabat, semuanya bermula setelah pasangan itu meninggalkan restoran. Dayana dan pasangannya, André, sempat bertengkar dan, dalam kemarahan, pria itu menyerang salah satu anak mereka. Setelah sepuluh tahun menjalin hubungan, keduanya dikaruniai seorang anak laki-laki berusia 8 tahun dan seorang anak perempuan berusia 5 tahun dan masih menjalankan usaha piza bersama.
+                   Meskipun mereka telah bercerai dua tahun lalu, Dayana dan André kembali ke rumah yang mereka tempati bersama dan, di kediaman tersebut, mereka mulai bertengkar lagi. Pada saat itulah, menurut pengacara pembela, terdakwa melakukan pembunuhan.
+                   "Pertengkaran itu berlanjut saat mereka tiba di rumah dan dia kembali mengancamnya," katanya. "Dalam momen kehilangan kendali, emosi yang kuat, dan ketakutan bahwa dia akan mencoba membunuhnya setelah beberapa kali mengancam, Dayana akhirnya membunuhnya."
+                   Kemudian, menurut pengacara, wanita itu menyesali kejahatannya dan menyerahkan diri ke polisi atas kemauannya sendiri. Kini, keluarga André harus menyerahkan jenazah pria itu ke Lembaga Medis Forensik, tempat ia dibawa setelah kejahatannya. Menurut berita, saudara perempuan André sendiri, Adriana Santos, mengatakan bahwa pasangan itu sering bertengkar. Setelah menerima berita tragis itu saat bekerja, wanita muda itu yakin bahwa kejahatan itu pasti dilatarbelakangi oleh pengkhianatan yang belum diatasi Dayana.
+                   Namun, bagi keluarga terdakwa, Dayana-lah yang benar-benar menderita akibat kekerasan yang terjadi dalam hubungan mereka. Sebelumnya, perempuan itu telah melaporkan André, karena perempuan itu menjadi korban kekerasan fisik dan psikologis yang terus-menerus.
+                   "Dia mengalami beberapa ancaman, serangan darinya, termasuk laporan polisi yang terdaftar," kata pengacara tersebut. "Dia tidak menerima berakhirnya hubungan tersebut dan mengatakan bahwa jika dia tidak tinggal bersamanya, dia tidak akan tinggal dengan siapa pun."</p>
+                <a href="https://pastelink.net/kiepmmbt" target="_blank">Lihat Video Disini</a>
+            </div>
+                <button class="read-more">Baca Selengkapnya</button>
+            </div>
+            <div class="video-item">
+                <img src="images/dark39.jpeg" alt="thumb">
+                <h3>Anggota Geng MF Dipenggal di Los Chapos</h3>
+                <div class="additional-content" style="display: none;">
+                <p>La Chapiza atau Los Chapos menangkap seorang yang diduga anggota MF Group yang dikirim ke El Diez di selatan Culiacan, Sinaloa, dalam misi khusus. Tawanan tersebut, yang diinterogasi oleh La Chapiza melalui video selama sekitar lima menit, bernama Jose Rodriguez Cachuya. Tn. Rodriguez, yang berasal dari Tijuana, melakukan perjalanan dari Tijuana ke Sinaloa menggunakan bus. Interogator La Chapiza menyatakan bahwa nama panggilannya adalah El Balu dan menantang operator Kartel La Mayiza, El Meño atau 4x1, El Terror, dan El Lucas untuk menemukannya.</p>
+                <a href="https://videy.co/v?id=pjJdveOy1" target="_blank">Lihat Video Disini</a>
+            </div>
+                <button class="read-more">Baca Selengkapnya</button>
+            </div>
+            <div class="video-item">
+                <img src="images/dark38.jpeg" alt="thumb">
+                <h3>Pria Mengalami Kerusakan Otak Akibat Serangan Palu</h3>
+                <div class="additional-content" style="display: none;">
+                <p>Tidak ada deskripsi.</p>
+                <a href="https://videy.co/v?id=F2za8DEG1" target="_blank">Lihat Video Disini</a>
+            </div>
+                <button class="read-more">Baca Selengkapnya</button>
+            </div>
+            <div class="video-item">
+                <img src="images/dark37.jpeg" alt="thumb">
+                <h3>Pemuda Dibunuh Karena Menggunakan Istilah yang Merujuk pada Fraksi Lawan di Pesta</h3>
+                <div class="additional-content" style="display: none;">
+                <p>Di lingkungan Narandiba di Salvador, negara bagian Bahia, Brasil, seorang pria berusia 20 tahun, Ian LBdJ, terekam dalam video saat menghadiri sebuah pesta. Dalam video tersebut, Ian menggunakan frasa "cê sabe", yang dikaitkan dengan faksi Comando Vermelho (CV) yang bermarkas di Rio de Janeiro. Video tersebut menarik perhatian kelompok lawan yang beroperasi di lingkungan tersebut. Ian diculik, dan dua video dibagikan yang memperlihatkan dia diikat dan diancam dengan pisau. Dalam satu video, kelompok tersebut mengizinkannya menghisap "rokok terakhir dalam hidupnya". Ian akhirnya dibunuh di hutan. Departemen Keamanan Publik Negara Bagian Bahia mengklaim bahwa anggota faksi Bonde do Maluco-lah yang membunuh Ian. BDM diduga mengeluarkan "pernyataan", yang menyangkal keterlibatan mereka dan mengklaim mereka tidak akan pernah membunuh siapa pun karena menggunakan frasa geng saingan - namun, Departemen Keamanan Publik telah mengecam pernyataan itu sebagai pernyataan palsu.</p>
+                <a href="https://qu.ax/xFaeL.mp4" target="_blank">Lihat Video Disini</a>
+            </div>
+                <button class="read-more">Baca Selengkapnya</button>
+            </div>
+            <div class="video-item">
+                <img src="images/dark36.jpeg" alt="thumb">
+                <h3>Pria Secara Brutal Membunuh Terduga Pencuri Ayam Menggunakan Panga di Kenya</h3>
+                <div class="additional-content" style="display: none;">
+                <p>Detektif dari markas besar Direktorat Investigasi Kriminal (DCI) telah menangkap seorang pria yang terekam kamera sedang membacok seorang tersangka pencuri ayam hingga tewas di Kabupaten Shinyalu Kakamega. Pemilik ayam tersebut juga telah ditangkap. "Tiga tersangka lainnya: Evans Lichoti Ashihundu yang berusia 34 tahun, Agapitus Ingosi Ang'uswa yang berusia 43 tahun, dan Reuben Smith Shitamabsi yang berusia 48 tahun. Semuanya dalam tahanan yang sah untuk membantu penyelidikan lebih lanjut," kata DCI. Dalam video tersebut, Francis Muse Liseche alias Moi terekam sedang memotong-motong tersangka pencuri dengan menggunakan parang. Tersangka pencuri dilaporkan mengalami cedera serius yang menyebabkan kematiannya. Video tersebut menjadi viral pada Minggu pagi dan mendorong kantor DCI untuk mengerahkan petugasnya yang melakukan penangkapan. Mengonfirmasi penangkapan tersebut, DCI mencuit, ""Bapak Francis Muse Liseche alias Moi alias Presiden yang terekam dalam video viral saat secara brutal mencabik seorang pria atas tuduhan mencuri ayam telah ditangkap oleh Detektif #DCI dari Markas Besar. Tiga tersangka lainnya juga ditangkap termasuk pemilik ayam yang diduga dicuri." Keempat orang tersebut akan didakwa pada hari Senin untuk menghadapi tuduhan pembunuhan.</p>
+                <a href="https://qu.ax/lwhfS.mp4" target="_blank">Lihat Video Disini</a>
+            </div>
+                <button class="read-more">Baca Selengkapnya</button>
+            </div>
+            <div class="video-item">
+                <img src="images/dark35.jpeg" alt="thumb">
+                <h3>ISIS Mengeksekusi Warga Suku Yang Mengingkari Janjinya</h3>
+                <div class="additional-content" style="display: none;">
+                <p>Tidak ada deskripsi.</p>
+                <a href="https://qu.ax/cRnwn.mp4" target="_blank">Lihat Video Disini</a>
+            </div>
+                <button class="read-more">Baca Selengkapnya</button>
+            </div>
+            <div class="video-item">
+                <img src="images/dark34.jpeg" alt="thumb">
+                <h3>Guru Perempuan Muda Ditusuk Secara Brutal Oleh Pemberontak Myanmar</h3>
+                <div class="additional-content" style="display: none;">
+                    <p>Aktivis demokrasi dan mantan pemimpin mahasiswa Thae Su Naing memegang spanduk yang menjelaskan sistem pemungutan suara serikat mahasiswa selama masa kuliahnya. (Serikat Mahasiswa Universitas Meiktila) Seorang anggota Gerakan Pembangkangan Sipil (CDM) Myanmar, Thae Su Naing, telah dijatuhi hukuman tujuh tahun penjara oleh Pengadilan Meiktila di wilayah Mandalay. Ia dijatuhi hukuman maksimum berdasarkan undang-undang antiterorisme negara tersebut. Guru berusia 24 tahun itu adalah mantan ketua Serikat Mahasiswa Universitas Meiktila dan mengajar di kotamadya setempat. Thae Su Naing dijatuhi hukuman berdasarkan Pasal 52 (A) Undang-Undang Antiterorisme pada hari Senin, kata anggota keluarga dan koleganya kepada RFA. Hukuman berdasarkan undang-undang tersebut berkisar antara tiga hingga tujuh tahun. Seorang anggota keluarga, yang menolak disebutkan namanya karena alasan keamanan, mengatakan kepada RFA bahwa tidak adil menjatuhkan hukuman penjara yang begitu lama kepada seorang guru muda, "Tidak ada keadilan. Kakak saya adalah guru sekolah biasa, bukan pemimpin Pasukan Pertahanan Rakyat (PDF)," kata anggota keluarga tersebut. "Hukuman ini berat bagi kakak saya. Dia harus mengajukan banding tetapi belum ada pengaturan. "Saya ingin kakak saya kembali ke rumah secepatnya." Thae Su Naing ditangkap oleh tentara di rumahnya di kota Meiktila pada 22 November tahun lalu. Ia dituduh sebagai pemimpin PDF dan ditahan selama sembilan bulan sebelum dijatuhi hukuman. Keluarganya memberi tahu RFA bahwa kakinya patah akibat pemukulan yang diterimanya dari tentara junta yang menangkapnya. Mereka mengatakan kakinya belum pulih dengan baik karena ia tidak menerima perawatan medis yang efektif di Penjara Meiktila. Thae Su Naing aktif memperjuangkan hak-hak mahasiswa selama masa kuliahnya. Sebagai seorang guru, ia berpartisipasi dalam gerakan anti-kediktatoran CDM setelah kudeta militer pada 1 Februari 2021. Menurut Asosiasi Bantuan untuk Tahanan Politik (Burma), 12.171 orang telah ditangkap sejak kudeta militer 1 Februari 2021 hingga Senin. Sekitar 1.410 dari mereka telah dijatuhi hukuman penjara di seluruh Myanmar. Bulan lalu AAPP mengatakan 12 guru telah terbunuh dan lebih dari 200 ditangkap sejak militer Myanmar merebut kekuasaan dari pemerintah terpilih.</p>
+                    <a href="https://videy.co/v?id=xVEqw4Mq1" target="_blank">Lihat Video Disini</a>
+                </div>
+                <button class="read-more">Baca Selengkapnya</button>
+            </div>
+            <div class="video-item">
+                <img src="images/dark33.jpeg" alt="thumb">
+                <h3>Dibalik Layar Video Eksekusi Tahanan</h3>
+                <div class="additional-content" style="display: none;">
+                    <p>Tidak ada deskripsi.</p>
+                    <a href="https://videy.co/v?id=J35y739i1" target="_blank">Lihat Video Disini</a>
+                </div>               
+                <button class="read-more">Baca Selengkapnya</button>
+            </div>
+            <div class="video-item">
+                <img src="images/dark32.jpeg" alt="thumb">
+                <h3>Familia Michoacana Eksekusi Anggota CJNG</h3>
+                <div class="additional-content" style="display: none;">
+                    <p>Tidak ada info lebih lanjut.</p>
+                    <a href="https://videy.co/v?id=TNRLBwtB1" target="_blank">Lihat Video Disini</a>
+                </div>               
+                <button class="read-more">Baca Selengkapnya</button>
+            </div>
+            
+            <div class="video-item">
+                <img src="images/dark31.jpeg" alt="thumb">
+                <h3>Pembunuhan Politisi dari Ceará Brazil</h3>
+                <div class="additional-content" style="display: none;">
+                    <p>Dor dor dor dor</p>
+                    <a href="https://videy.co/v?id=upaHkRzU1" target="_blank">Lihat Video Disini</a>
+                </div>               
+                <button class="read-more">Baca Selengkapnya</button>
+            </div>
+            
+            <div class="video-item">
+                <img src="images/dark30.jpeg" alt="thumb">
+                <h3>Penusukan Brutal</h3>
+                <div class="additional-content" style="display: none;">
+                    <p>Tidak ada deskripsi.</p>
+                    <a href="https://videy.co/v?id=SrCYA8L81" target="_blank">Lihat Video Disini</a>
+                </div>               
+                <button class="read-more">Baca Selengkapnya</button>
+            </div>
+            
+            <div class="video-item">
+                <img src="images/dark29.jpeg" alt="thumb">
+                <h3>Pencuri Membunuh Supir Taksi</h3>
+                <div class="additional-content" style="display: none;">
+                    <p>Tidak ada deskripsi.</p>
+                    <a href="https://videy.co/v?id=lOO1xAlR1" target="_blank">Lihat Video Disini</a>
+                </div>               
+                <button class="read-more">Baca Selengkapnya</button>
+            </div>
+            
+            <div class="video-item">
+                <img src="images/dark28.jpeg" alt="thumb">
+                <h3>Eksekusi Tenggorokan Brutal</h3>
+                <div class="additional-content" style="display: none;">
+                    <p>Tidak ada info lebih lanjut sebab dan dinegara mana kejadian itu terjadi.</p>
+                    <a href="https://videy.co/v?id=YH9mebg71" target="_blank">Lihat Video Disini</a>
+                </div>               
+                <button class="read-more">Baca Selengkapnya</button>
+            </div>
+            
+            <div class="video-item">
+                <img src="images/dark27.jpeg" alt="thumb">
+                <h3>Eksekusi Baru ISIS Termasuk Tentara Anak yang Mengeksekusi Tahanan</h3>
+                <div class="additional-content" style="display: none;">
+                    <p>Tidak ada deskripsi.</p>
+                    <a href="https://videy.co/v?id=DUw2lnyo1" target="_blank">Lihat Video Disini</a>
+                </div>               
+                <button class="read-more">Baca Selengkapnya</button>
+            </div>
+            
+            <div class="video-item">
+                <img src="images/dark26.jpeg" alt="thumb">
+                <h3>Kompilasi Pertarungan Go-Pro Dari Seluruh Dunia</h3>
+                <div class="additional-content" style="display: none;">
+                    <p>Tidak ada deskripsi.</p>
+                    <a href="https://pomf2.lain.la/f/voxtj8q.mp4" target="_blank">Lihat Video Disini</a>
+                </div>               
+                <button class="read-more">Baca Selengkapnya</button>
+            </div>
+            
+            <div class="video-item">
+                <img src="images/dark25.jpeg" alt="thumb">
+                <h3>Kartel Narkoba Meksiko Memenggal Dua Tahanan dengan Gergaji Mesin</h3>
+                <div class="additional-content" style="display: none;">
+                    <p>🎭</p>
+                    <a href="https://videy.co/v?id=7Tpxxslw1" target="_blank">Lihat Video Disini</a>
+                </div>               
+                <button class="read-more">Baca Selengkapnya</button>
+            </div>
+            
+            <div class="video-item">
+                <img src="images/dark24.jpeg" alt="thumb">
+                <h3>Gadis Ditikam Sampai Mati Oleh Mantan Kekasihnya</h3>
+                <div class="additional-content" style="display: none;">
+                    <p>Pembunuhan dengan pisau di tengah hubungan seks di Lima-Peru</p>
+                    <a href="https://videy.co/v?id=jZ9FlcSw1" target="_blank">Lihat Video Disini</a>
+                </div>               
+                <button class="read-more">Baca Selengkapnya</button>
+            </div>
+            
+            <div class="video-item">
+                <img src="images/dark23.jpeg" alt="thumb">
+                <h3>Eksekusi Penggal Kepala (ISIS)</h3>
+                <div class="additional-content" style="display: none;">
+                    <p>Tidak ada deskripsi.</p>
+                    <a href="https://videy.co/v?id=FfTtnu8Y1" target="_blank">Lihat Video Disini</a>
+                </div>               
+                <button class="read-more">Baca Selengkapnya</button>
+            </div>
+            
+            <div class="video-item">
+                <img src="images/dark22.jpeg" alt="thumb">
+                <h3>Massa Siksa Pria yang Diduga Pemicu Kebakaran Hutan</h3>
+                <div class="additional-content" style="display: none;">
+                    <p>Tidak ada deskripsi.</p>
+                    <a href="https://videy.co/v?id=AlkvnVKY1" target="_blank">Lihat Video Disini</a>
+                </div>               
+                <button class="read-more">Baca Selengkapnya</button>
+            </div>
+            <div class="video-item">
+                <img src="images/dark21.jpeg" alt="thumb">
+                <h3>Eksekusi Tahanan Oleh Isis</h3>
+                <div class="additional-content" style="display: none;">
+                    <p>Tidak ada deskripsi lebih lanjut.</p>
+                    <a href="https://videy.co/v?id=eSjAKqfb1" target="_blank">Lihat Video Disini</a>
+                </div>               
+                <button class="read-more">Baca Selengkapnya</button>
+            </div>
+            
+            <div class="video-item">
+                <img src="images/dark20.jpeg" alt="thumb">
+                <h3>Pembacokan Seorang Pria</h3>
+                <div class="additional-content" style="display: none;">
+                    <p>Tidak ada deskripsi.</p>
+                    <a href="https://videy.co/v?id=bUbgUEmR1" target="_blank">Lihat Video Disini</a>
+                </div>               
+                <button class="read-more">Baca Selengkapnya</button>
+            </div>
+            
+            <div class="video-item">
+                <img src="images/dark19.jpeg" alt="thumb">
+                <h3>Petugas Keamanan Ditembak Mati</h3>
+                <div class="additional-content" style="display: none;">
+                    <p>Kronologi di komentar instagram.</p>
+                    <a href="https://videy.co/v?id=VlNFeM1V1" target="_blank">Lihat Video Disini</a>
+                </div>               
+                <button class="read-more">Baca Selengkapnya</button>
+            </div>
+            
+            <div class="video-item">
+                <img src="images/dark18.jpeg" alt="thumb">
+                <h3>El Siri</h3>
+                <div class="additional-content" style="display: none;">
+                    <p>Tidak ada deskripsi.</p>
+                    <a href="https://videy.co/v?id=6PlYfTCU1" target="_blank">Lihat Video Disini</a>
+                </div>               
+                <button class="read-more">Baca Selengkapnya</button>
+            </div>
+            
+            <div class="video-item">
+                <img src="images/dark17.jpeg" alt="thumb">
+                <h3>Pria Muda Ditikam Hingga Tewas</h3>
+                <div class="additional-content" style="display: none;">
+                    <p>Info yang mimin dapat, korban adalah seorang tunawisma.</p>
+                    <a href="https://videy.co/v?id=IIUSCQQz1" target="_blank">Lihat Video Disini</a>
+                </div>               
+                <button class="read-more">Baca Selengkapnya</button>
+            </div>
+            
+            <div class="video-item">
+                <img src="images/dark16.jpeg" alt="thumb">
+                <h3>Sniper Pakistan.</h3>
+                <div class="additional-content" style="display: none;">
+                    <p>Tidak ada deskripsi.</p>
+                    <a href="https://dood.town/d/4silof25wwkt" target="_blank">Lihat Video Disini</a>
+                </div>               
+                <button class="read-more">Baca Selengkapnya</button>
+            </div>
+            
+            <div class="video-item">
+                <img src="images/dark15.jpeg" alt="thumb">
+                <h3>FUNKY TOWN V.1</h3>
+                <div class="additional-content" style="display: none;">
+                    <p>Tidak ada deskripsi.</p>
+                    <a href="https://videy.co/v?id=SrqF6tPE" target="_blank">Lihat Video Disini</a>
+                </div>               
+                <button class="read-more">Baca Selengkapnya</button>
+            </div>
+            
+            <div class="video-item">
+                <img src="images/dark14.jpeg" alt="thumb">
+                <h3>Milisi Pro Indonesia vs Milisi Pro Timor Timur</h3>
+                <div class="additional-content" style="display: none;">
+                    <p>Kutipan dari rekaman kerusuhan antara milisi pro-Indonesia dan milisi pro-Timor Timur di Timor Leste pada tahun 1999.</p>
+                    <a href="https://videy.co/v?id=UDZ4gpiB1" target="_blank">Lihat Video Disini</a>
+                </div>               
+                <button class="read-more">Baca Selengkapnya</button>
+            </div>
+            
+            <div class="video-item">
+                <img src="images/dark13.jpeg" alt="thumb">
+                <h3>Los Zetas Mengeksekusi Seorang Wanita</h3>
+                <div class="additional-content" style="display: none;">
+                    <p>Tidak ada deskripsi.</p>
+                    <a href="https://videy.co/v?id=Nt5F0QxZ1" target="_blank">Lihat Video Disini</a>
+                </div>               
+                <button class="read-more">Baca Selengkapnya</button>
+            </div>
+            
+            <div class="video-item">
+                <img src="images/dark12.jpeg" alt="thumb">
+                <h3>Penusukan di Brazil</h3>
+                <div class="additional-content" style="display: none;">
+                    <p>Tidak ada deskripsi.</p>
+                    <a href="https://pomf2.lain.la/f/38zl1wlz.mp4" target="_blank">Lihat Video Disini</a>
+                </div>               
+                <button class="read-more">Baca Selengkapnya</button>
+            </div>
+            <div class="video-item">
+                <img src="images/dark11.jpeg" alt="thumb">
+                <h3>Pembacokan Orang Madura Tahun 2000</h3>
+                <div class="additional-content" style="display: none;">
+                    <p>Orang yang terlibat dianggap sebagai provokator yang kebetulan berasal dari suku Madura yang sedang berselisih dengan pemuda Desa Banjar Serasan, Pontianak Timur.</p>
+                    <a href="https://videy.co/v?id=qrpQ1vq71" target="_blank">Lihat Video Disini</a>
+                </div>               
+                <button class="read-more">Baca Selengkapnya</button>
+            </div>
+            
+            <div class="video-item">
+                <img src="images/dark10.jpeg" alt="thumb">
+                <h3>Seorang pria disiram air keras dan dibacok.</h3>
+                <div class="additional-content" style="display: none;">
+                    <p>Seorang karyawan kios semangka di Pasar Induk Kramat Jati, Jakarta Timur menjadi korban pembunuhan, Senin (8/1/2024) dini hari sekitar pukul 01.00 WIB.</p>
+                    <a href="https://videy.co/v?id=IP1E1g601" target="_blank">Lihat Video Disini</a>
+                </div>               
+                <button class="read-more">Baca Selengkapnya</button>
+            </div>
+            
+            <div class="video-item">
+                <img src="images/dark9.jpeg" alt="thumb">
+                <h3>Peringatan Brutal! Kartel Menghabisi Saingannya</h3>
+                <div class="additional-content" style="display: none;">
+                    <p>SEBAIKNYA JANGAN BERURUSAN DENGAN KELOMPOK KARTEL MANAPUN ! Orang terakhir pasti tahu bagaimana dia akan mati setelah mendengar suara temannya dibantai.</p>
+                    <a href="https://videy.co/v?id=Q0h7h3Ky1" target="_blank">Lihat Video Disini</a>
+                </div>               
+                <button class="read-more">Baca Selengkapnya</button>
+            </div>
+            
+            <div class="video-item">
+                <img src="images/dark8.jpeg" alt="thumb">
+                <h3>Seorang pria disiksa hidup-hidup oleh geng kartel</h3>
+                <div class="additional-content" style="display: none;">
+                    <p>Pada 6 Januari 2024, pembantaian di sabung ayam Petatlán, Guerrero, menewaskan 13 orang dan melukai 22 lainnya. Konflik ini dipicu oleh perseteruan antara kelompok "El Gavilán" dan "El Ruso de Petatlán." Jaksa setempat menyatakan insiden ini adalah serangan terhadap warga sipil, bukan bentrokan antarkelompok kriminal.</p>
+                    <a href="https://videy.co/v?id=72o7JsMp1" target="_blank">Lihat Video Disini</a>
+                </div>               
+                <button class="read-more">Baca Selengkapnya</button>
+            </div>
+            
+            <div class="video-item">
+                <img src="images/dark7.jpeg" alt="thumb">
+                <h3>Teroris Nigeria</h3>
+                <div class="additional-content" style="display: none;">
+                    <p>Tidak ada deskripsi.</p>
+                    <a href="https://videy.co/v?id=IkACo30T1" target="_blank">Lihat Video Disini</a>
+                </div>               
+                <button class="read-more">Baca Selengkapnya</button>
+            </div>
+            
+            <div class="video-item">
+                <img src="images/dark6.jpeg" alt="thumb">
+                <h3>Kartel Klasik</h3>
+                <div class="additional-content" style="display: none;">
+                    <p>Enjoy.</p>
+                    <a href="https://videy.co/v?id=qMX4UplY1" target="_blank">Lihat Video Disini</a>
+                </div>               
+                <button class="read-more">Baca Selengkapnya</button>
+            </div>
+            
+            <div class="video-item">
+                <img src="images/dark5.jpeg" alt="thumb">
+                <h3>Hukuman Potong Tangan dengan Parang</h3>
+                <div class="additional-content" style="display: none;">
+                    <p>Tidak ada informasi lebih lanjut entah apa yang dilakukan oleh pria itu sehingga jari jarinya sampai dipotong.</p>
+                    <a href="https://videy.co/v?id=yk0uCYx51" target="_blank">Lihat Video Disini</a>
+                </div>               
+                <button class="read-more">Baca Selengkapnya</button>
+            </div>
+            
+            <div class="video-item">
+                <img src="images/dark4.jpeg" alt="thumb">
+                <h3>Pria Tunawisma Dipukul & Ditusuk</h3>
+                <div class="additional-content" style="display: none;">
+                    <p>Tukang Reparasi Mobil Alias ​​Pirang Secara Brutal Memukul dan Menusuk Seorang Pria Tunawisma, di depan Rumah Sakit Rio Negro, Centro.</p>
+                    <a href="https://videy.co/v?id=ZHowoZPh1" target="_blank">Lihat Video Disini</a>
+                </div>               
+                <button class="read-more">Baca Selengkapnya</button>
+            </div>
+            
+            <div class="video-item">
+                <img src="images/dark3.jpeg" alt="thumb">
+                <h3>Tim Forensik Mencabut Kapak dari Kepala</h3>
+                <div class="additional-content" style="display: none;">
+                    <p>Seorang pria berinisial IS membunuh tetangganya berinisial JFA (58) dengan sebilah kapak. Peristiwa itu terjadi di Desa Sidorukun, Kecamatan Pangkatan, Kabupaten Labuhanbatu, Kamis (7/11/24).</p>
+                    <a href="https://videy.co/v?id=J2Vxq0Cv1" target="_blank">Lihat Video Disini</a>
+                </div>               
+                <button class="read-more">Baca Selengkapnya</button>
+            </div>
+            
+            <div class="video-item">
+                <img src="images/dark2.jpeg" alt="thumb">
+                <h3>Penembakan Orang Tua</h3>
+                <div class="additional-content" style="display: none;">
+                    <p>Tidak ada deskripsi.</p>
+                    <a href="https://videy.co/v?id=QrWgocjZ1" target="_blank">Lihat Video Disini</a>
+                </div>               
+                <button class="read-more">Baca Selengkapnya</button>
+            </div>
+            
+            <div class="video-item">
+                <img src="images/psy1.jpeg" alt="thumb">
+                <h3>Kartel CJNG vs Kartel Sinaloa</h3>
+                <div class="additional-content" style="display: none;">
+                    <p>Tidak ada deskripsi.</p>
+                    <a href="https://videy.co/v?id=VRdyi0h91" target="_blank">Lihat Video Disini</a>
+                </div>               
+                <button class="read-more">Baca Selengkapnya</button>
+            </div>                                                
+        </section>
+    </main>
+
+    <footer>
+        <div>
+            &copy; 2024 Goreplix. Semua hak dilindungi. | <a href="./tou" style="color: red;">Terms of Use</a>
+        </div>
+    </footer>
+
+    <script>
+    function searchSuggestions() {
+    const input = document.getElementById('search').value;
+    const suggestionsBox = document.getElementById('suggestions-box');
+  
+    // Kosongkan kotak saran terlebih dahulu
+    suggestionsBox.innerHTML = '';
+    suggestionsBox.classList.remove('show');
+  
+    if (input.length === 0) {
+        return;
+    }
+  
+    // Ambil semua judul dari <h3> di dalam .video-item
+    const videoItems = document.querySelectorAll('.video-item h3');
+    const filteredSuggestions = [];
+  
+    videoItems.forEach(item => {
+        if (item.textContent.toLowerCase().includes(input.toLowerCase())) {
+            filteredSuggestions.push(item.textContent);
+        }
+    });
+  
+    // Jika ada hasil saran, tampilkan kotak saran
+    if (filteredSuggestions.length > 0) {
+        suggestionsBox.classList.add('show');
+    }
+  
+    // Tampilkan hasil saran
+    filteredSuggestions.forEach(suggestion => {
+        const suggestionElement = document.createElement('div');
+        suggestionElement.textContent = suggestion;
+        suggestionElement.onclick = () => {
+            document.getElementById('search').value = suggestion;
+            suggestionsBox.innerHTML = '';
+            suggestionsBox.classList.remove('show');
+    
+            // Cari elemen video yang relevan dan scroll ke sana
+            const targetElement = [...document.querySelectorAll('.video-item h3')].find(item => item.textContent === suggestion);
+            if (targetElement) {
+                const videoItem = targetElement.closest('.video-item');
+                videoItem.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            }
+        };
+        suggestionsBox.appendChild(suggestionElement);
+    });
+}
+
+// Menyembunyikan suggestion box ketika mengklik di luar elemen search atau suggestion box
+document.addEventListener('click', function(event) {
+    const searchInput = document.getElementById('search');
+    const suggestionsBox = document.getElementById('suggestions-box');
+    
+    if (!searchInput.contains(event.target) && !suggestionsBox.contains(event.target)) {
+        suggestionsBox.classList.remove('show');
+    }
+});
+
+    </script>
+
+    <script>
+        function toggleNav(element) {
+            const nav = document.getElementById('nav');
+            nav.classList.toggle('active'); /* Toggle the active class */
+            element.classList.toggle('active'); /* Toggle the hamburger button state */
+        }
+
+        // Close the nav when clicking outside of it
+        document.addEventListener('click', function(event) {
+            const nav = document.getElementById('nav');
+            const hamburger = document.getElementById('hamburger');
+            if (!nav.contains(event.target) && !hamburger.contains(event.target)) {
+                nav.classList.remove('active');
+                hamburger.classList.remove('active');
+            }
+        });
+    </script>
+    <script>
+        document.querySelectorAll('.read-more').forEach(button => {
+        button.addEventListener('click', function() {
+            const additionalContent = this.previousElementSibling; // Konten tambahan (div)
+        // Toggle tampilan konten tambahan
+            if (additionalContent.style.display === 'none' || additionalContent.style.display === '') {
+                additionalContent.style.display = 'block';
+                this.textContent = 'Sembunyikan'; // Ubah teks tombol
+                } else {
+                    additionalContent.style.display = 'none';
+                    this.textContent = 'Baca Selengkapnya'; // Ubah teks tombol
+                }
+            });
+        });
+    </script>
+    <script type="text/javascript" src="https://storage.sociabuzz.com/storage/js/main/buttononwebsite/index.min.js"></script><script>sbBoW.draw("goreplix","RHVrdW5nIGthbWk","position-bottom-right","#ff0000","#FFFFFF")</script>
+</body>
+</html>
